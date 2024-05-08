@@ -1,1 +1,7 @@
 users show
+<div><%= @user.name %></div>
+<div><%= @user.introduction %></div>
+<div><%= @user.email %></div>
+<div>フォロー:<%= @user.followers.count %>人</div>
+<div>フォロワー:<%= @user.followeds.count %>人</div>
+<div><%= @user.posts.count %></div>
