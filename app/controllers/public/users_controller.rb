@@ -1,10 +1,16 @@
 class Public::UsersController < ApplicationController
+  before_action :authenticate_user!
+
   def index
     @users = User.all
   end
 
   def show
-    @user = User.find(params[:id])
+    if request.path == '/users/my_page'
+      @user = current_user
+    else
+      @user = User.find(params[:id])
+    end
   end
 
   def edit
@@ -21,9 +27,9 @@ class Public::UsersController < ApplicationController
 
   def withdraw
   end
-  
+
   private
-  
+
   def user_params
     params.require(:user).permit(:name,:introduction,:email,:password)
   end
