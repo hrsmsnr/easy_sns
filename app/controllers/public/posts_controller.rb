@@ -4,17 +4,24 @@ class Public::PostsController < ApplicationController
   end
 
   def index
-    @posts = Posts.all
+    @posts = Post.all
   end
 
   def show
     @post = Post.find(params[:id])
+    @post_details = @post.post_details
+    @comment = Comment.new
+    @comments = @post.comments
   end
 
   def create
     @post = Post.new(post_params)
-    @post.save
-    redirect_to post_path(@post)
+    @post.user_id = current_user.id
+    if @post.save
+      redirect_to post_path(@post)
+    else
+      render :new
+    end
   end
 
   def edit

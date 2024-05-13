@@ -14,7 +14,6 @@
         <td>フォロー:<%= user.followers.count %>人</td>
         <td>フォロワー:<%= user.followeds.count %>人</td>
         <td>投稿数:<%= user.posts.count %></td>
-        <!--ログイン中のユーザーはフォローボタンなし・リンクをmy_pageに変更-->
         <% unless user == current_user %>
           <td>
             <% if current_user.following?(user) %>
@@ -29,6 +28,7 @@
           </td>
           <td><%= link_to 'Show', user_path(user.id) %></td>
         <% else %>
+        <!--ログイン中のユーザーはフォローボタンなしリンクをmy_pageに変更-->
         <td></td>
         <td><%= link_to 'Show', users_my_page_path %></td>
         <% end %>

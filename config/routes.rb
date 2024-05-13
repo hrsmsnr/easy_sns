@@ -20,7 +20,12 @@ Rails.application.routes.draw do
   scope module: :public do
     root to: 'homes#top'
     get 'about' => 'homes#about'
+
     get 'users/my_page' => 'users#show'
+    get 'users/:id', to: redirect { |params, request|
+  "/users/my_page"
+}
+
     resources :users, only: [:index,:show,:edit,:update] do
       resource :relationships, only: [:create, :destroy]
       get 'follows' => 'users#follows', as: 'follows'
@@ -28,12 +33,12 @@ Rails.application.routes.draw do
     end
     get 'users/:id/unsubsribe' => 'users#unsubscribe'
     patch 'users/:id/withdraw' => 'users#withdraw'
-    
-    
+
+
     # get 'posts/:category' => 'posts#index'
     # get 'posts/:category/new' => 'posts#new'
-    
-    #カテゴリ別のタブ分けができたら上二つに切り替え 
+
+    #カテゴリ別のタブ分けができたら上二つに切り替え
     resources :posts, only: [:new,:index,:show,:create,:edit,:update,:destroy] do
       resources :comments, only: [:create,:destroy]
       resource :favorite, only: [:create, :destroy]

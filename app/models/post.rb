@@ -7,9 +7,9 @@ class Post < ApplicationRecord
   
   # いいね中確認メソッド
   def favorited_by?(user)
-		favorites.exists?(user_id: user.id)
-	end
-	
+    favorites.exists?(user_id: user.id)
+  end
+  
   # 画像を登録可能に
   has_one_attached :post_image
   
@@ -21,9 +21,9 @@ class Post < ApplicationRecord
     validates :body, presence: true, length: {maximum: 200}
   end
   # 通常の投稿以外では投稿詳細の入力を必須にする
-  unless :category == 0
-    validates :post_details, presence: true
-  end
+  # unless :category == 0
+  #   validates :post_details, presence: true
+  # end
   
   # 画像の指定がない場合代わりの画像を挿入
   def get_post_image

@@ -1,1 +1,8 @@
 POST SHOW
+<div><%= @post.title %></div>
+<div><%= @post.body %></div>
+<div><%= @post.category %></div>
+<div><%= @post.category %></div>
+<% if @post.user_id == current_user.id %>
+  <%= link_to "投稿を編集する", edit_post_path(@post) %>
+<% end %>
