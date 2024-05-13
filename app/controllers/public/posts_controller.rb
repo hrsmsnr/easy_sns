@@ -1,4 +1,7 @@
 class Public::PostsController < ApplicationController
+  before_action :authenticate_user!
+  before_action :is_matching_login_user, only: [:edit, :update]
+
   def new
     @post = Post.new
   end
@@ -30,12 +33,20 @@ class Public::PostsController < ApplicationController
 
   def update
     @post = Post.find(params[:id])
-    @post.update(post_params)
+    if @post.update(post_params)
+      @post_details = @post.post_details
+      @comment = Comment.new
+      @comments = @post.comments
+      render :show
+    else
+      render :edit
+    end
   end
 
   def destroy
     post = Post.find(params[:id])
     post.destroy
+    redirect_to users_my_page_path
   end
 
   private
@@ -44,4 +55,10 @@ class Public::PostsController < ApplicationController
     params.require(:post).permit(:title,:body,:category)
   end
 
+  def is_matching_login_user
+    @post = Post.find(params[:id])
+    unless @post.user_id == current_user.id
+      redirect_to posts_path
+    end
+  end
 end

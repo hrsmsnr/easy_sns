@@ -1,8 +1,13 @@
 <%= form_with model: @post do |f| %>
-
+<%= render "public/shared/error_messages", resource: @post %>
   <div class="field">
     <%= f.label :"タイトル" %><br />
     <%= f.text_field :title, autofocus: true %>
+  </div>
+
+  <div class="image_field">
+    <%= f.label :image, "画像" %>
+    <%= f.file_field :user_image,  accept:'user_image/*' %>
   </div>
 
   <div class="field">

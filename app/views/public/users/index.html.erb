@@ -29,8 +29,8 @@
           <td><%= link_to 'Show', user_path(user.id) %></td>
         <% else %>
         <!--ログイン中のユーザーはフォローボタンなしリンクをmy_pageに変更-->
-        <td></td>
-        <td><%= link_to 'Show', users_my_page_path %></td>
+          <td></td>
+          <td><%= link_to 'Show', user_path(user.id) %></td>
         <% end %>
       </tr>
     <% end %>
