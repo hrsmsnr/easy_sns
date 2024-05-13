@@ -1,1 +1,20 @@
 POST INDEX
+<% @posts.each do |post| %>
+  <div class="flex-column">
+    <%= link_to user_path(post.user_id) do %>
+      <div>
+        <%= image_tag post.user.get_user_image, size: '50x50' %>
+        <%= post.user.name %>
+      </div>
+    <% end %>
+    <%= link_to post_path(post.id) do %>
+      <div>
+        <%= post.title %>
+      </div>
+      <div>
+        <%= image_tag post.get_post_image, size: '50x50' %>
+        <%= post.body %>
+      </div>
+    <% end %>
+  </div>
+<% end %>

@@ -10,7 +10,16 @@ class Public::UsersController < ApplicationController
       @user = current_user
     else
       @user = User.find(params[:id])
+      if @user == current_user
+        redirect_to users_my_page_path
+      end
     end
+
+    # if request.path == '/users/my_page'
+    #   @user = current_user
+    # else
+    #   @user = User.find(params[:id])
+    # end
   end
 
   def edit

@@ -1,0 +1,18 @@
+<%= form_with model: @post do |f| %>
+
+  <div class="field">
+    <%= f.label :"タイトル" %><br />
+    <%= f.text_field :title, autofocus: true %>
+  </div>
+
+  <div class="field">
+    <%= f.label :"内容" %><br />
+    <%= f.text_area :body %>
+  </div>
+<!--カテゴリは仮置き（エラーが出る）-->
+  <!--<div class="field">-->
+  <!--  <%= f.label :"カテゴリ" %><br />-->
+  <!--  <%= f.select :category,Post.categories.map %>-->
+  <!--</div>-->
+  <%= f.submit "投稿内容を確定" %>
+<% end %>

@@ -24,15 +24,15 @@ class Public::SessionsController < Devise::SessionsController
   # def configure_sign_in_params
   #   devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
   # end
-  
+
   def after_sign_in_path_for(resource)
-    mypage_path
+    users_my_page_path
   end
-  
+
   def after_sign_out_path_for(resource)
     root_path
   end
-  
+
   def reject_inactive_user
     @user = user.find_by(email: params[:customer][:email])
     if @user

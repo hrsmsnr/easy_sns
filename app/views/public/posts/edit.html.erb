@@ -1,0 +1,14 @@
+<%= form_with model: @post do |f| %>
+
+  <div class="field">
+    <%= f.label :"タイトル" %><br />
+    <%= f.text_field :title, autofocus: true %>
+  </div>
+
+  <div class="field">
+    <%= f.label :"内容" %><br />
+    <%= f.text_area :body %>
+  </div>
+
+  <%= f.submit "投稿を更新" %>
+<% end %>

@@ -2,6 +2,10 @@
 
 <%= form_with model: @user, url: user_registration_path do |f| %>
   <%= render "public/shared/error_messages", resource: resource %>
+  <div class="image_field">
+    <%= f.label :image, "画像" %>
+    <%= f.file_field :user_image,  accept:'user_image/*' %>
+  </div>
 
   <div class="field">
      <%= f.label :"ニックネーム(後から変更可能)" %><br />

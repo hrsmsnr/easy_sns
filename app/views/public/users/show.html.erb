@@ -1,4 +1,8 @@
 users show
+<% if @user == current_user %>
+  <div class="btm"><%= link_to "ボタン", edit_user_path(current_user.id) %></div>
+<% else %>
+<% end %>
 <div><%= @user.name %></div>
 <div><%= @user.introduction %></div>
 <div><%= @user.email %></div>
