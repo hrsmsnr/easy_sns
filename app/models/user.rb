@@ -17,7 +17,7 @@ class User < ApplicationRecord
   # バリデーション
   validates :name, presence: true, length: { minimum: 2, maximum: 20 }, uniqueness: true
   validates :email, presence: true
-  validates :password, presence: true
+  # validates :password, presence: true
   validates :introduction, length: {maximum: 50 }
 
   # 画像の指定がない場合代わりの画像を挿入

@@ -1,8 +1,21 @@
 POST SHOW
-<div><%= @post.title %></div>
-<div><%= @post.body %></div>
-<div><%= @post.category %></div>
-<div><%= @post.category %></div>
 <% if @post.user_id == current_user.id %>
-  <%= link_to "投稿を編集する", edit_post_path(@post) %>
+  <div><%= link_to "投稿を編集する", edit_post_path(@post) %></div>
 <% end %>
+
+<% if @post.user_id == current_user.id %>
+  <div><%= link_to "投稿を削除する", post_path(@post), method: :delete %></div>
+<% end %>
+
+<div>表示ステータス:
+<% if @post.is_public == true %>
+  表示中
+<% else %>
+  非表示中
+<% end %>
+</div>
+
+<div><%= @post.category %></div>
+<div><%= @post.title %></div>
+<%= image_tag @post.user.get_user_image, size: '100x100' %>
+<div><%= @post.body %></div>

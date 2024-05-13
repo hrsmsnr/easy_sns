@@ -1,5 +1,6 @@
+<div>投稿編集ページ</div>
 <%= form_with model: @post do |f| %>
-
+  <%= render "public/shared/error_messages", resource: @post %>
   <div class="field">
     <%= f.label :"タイトル" %><br />
     <%= f.text_field :title, autofocus: true %>
@@ -11,4 +12,8 @@
   </div>
 
   <%= f.submit "投稿を更新" %>
+<% end %>
+
+<% if @post.user_id == current_user.id %>
+  <div><%= link_to "投稿を削除する", post_path(@post), method: :delete %></div>
 <% end %>

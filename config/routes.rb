@@ -20,16 +20,16 @@ Rails.application.routes.draw do
   scope module: :public do
     root to: 'homes#top'
     get 'about' => 'homes#about'
-
     get 'users/my_page' => 'users#show'
-    get 'users/:id', to: redirect { |params, request|
-  "/users/my_page"
-}
+
+    get 'users/unsubscribe' => 'users#unsubscribe'
+    patch 'users/withdraw' => 'users#withdraw'
 
     resources :users, only: [:index,:show,:edit,:update] do
       resource :relationships, only: [:create, :destroy]
       get 'follows' => 'users#follows', as: 'follows'
       get 'followers' => 'users#followers', as: 'followers'
+
     end
     get 'users/:id/unsubsribe' => 'users#unsubscribe'
     patch 'users/:id/withdraw' => 'users#withdraw'

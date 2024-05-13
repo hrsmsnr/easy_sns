@@ -1,8 +1,8 @@
 users edit
 
-<%= form_with model: @user, url: user_registration_path do |f| %>
+<%= form_with model: @user, url: user_path do |f| %>
   <%= render "public/shared/error_messages", resource: @user %>
-  
+
   <div class="image_field">
     <%= f.label :image, "現在の画像" %><br />
     <%= image_tag (@user.user_image.attached? ? @user.user_image : 'no_image.jpg') %><br />
@@ -28,3 +28,5 @@ users edit
     <%= f.submit "編集完了" %>
   </div>
 <% end %>
+</br>
+<div><%= link_to "退会する", users_withdraw_path, method: :patch, class: "btn" %></div>
