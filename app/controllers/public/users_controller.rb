@@ -7,15 +7,17 @@ class Public::UsersController < ApplicationController
   end
 
   def show
+    # マイページではログイン中のユーザーを表示
     if request.path == '/users/my_page'
       @user = current_user
-      # マイページではログイン中のユーザーを表示
+    ##
     else
       @user = User.find(params[:id])
+      # ログイン中のユーザーページに移動する際マイページに移動
       if @user == current_user
         redirect_to users_my_page_path
-        # ログイン中のユーザーページに移動する際マイページに移動
       end
+      ##
     end
 
     @posts = @user.posts
@@ -53,7 +55,8 @@ class Public::UsersController < ApplicationController
   end
 
   def ensure_correct_user
-    user = User.find(params[:id])
+    # user = User.find(params[:id])
+    user = current_user
     unless user.id == current_user.id
       redirect_to users_my_page_path
     end
