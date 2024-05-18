@@ -14,8 +14,24 @@ POST SHOW
   非表示中
 <% end %>
 </div>
+<div><%= image_tag @post.user.get_user_image, size: '50x50' %><%= @post.user.name %></div>
 
-<div><%= @post.category %></div>
-<div><%= @post.title %></div>
-<%= image_tag @post.user.get_user_image, size: '100x100' %>
+
+<div>|<%= @post.category %>|</div>
+<div>^<%= @post.title %>^</div>
+<%= image_tag @post.get_post_image, size: '100x100' %>
 <div><%= @post.body %></div>
+
+<!--新規コメント-->
+コメント
+<table class="comment-list">
+  <%= render "public/comments/comment_list", post: @post %>
+</table>
+
+新しいコメントの投稿
+<div class="form-model">
+  <%= form_with model: [@post, @comment], local: false do |f| %>
+    <%= f.text_area :body,class: "comment-text" %>
+    <%= f.submit "送信" %>
+  <% end %>
+</div>

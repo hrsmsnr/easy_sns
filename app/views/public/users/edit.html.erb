@@ -7,6 +7,12 @@ users edit
     <%= f.label :image, "現在の画像" %><br />
     <%= image_tag (@user.user_image.attached? ? @user.user_image : 'no_image.jpg') %><br />
     <%= f.file_field :user_image,  accept:'image/*' %>
+    <div class="image-field">
+      <div id="previews"></div>
+      <div class="click-upload">
+        <%= f.file_field :image %>
+      </div>
+    </div>
   </div>
 
   <div class="field">

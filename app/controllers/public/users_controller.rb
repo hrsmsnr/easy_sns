@@ -10,14 +10,14 @@ class Public::UsersController < ApplicationController
     # マイページではログイン中のユーザーを表示
     if request.path == '/users/my_page'
       @user = current_user
-    ##
+    #----------------------
     else
       @user = User.find(params[:id])
       # ログイン中のユーザーページに移動する際マイページに移動
       if @user == current_user
         redirect_to users_my_page_path
       end
-      ##
+      #----------------------
     end
 
     @posts = @user.posts
@@ -45,7 +45,6 @@ class Public::UsersController < ApplicationController
     user.update_column(:is_active, false)
     reset_session
     redirect_to new_user_registration_path
-    # redirect_to new_registration_path(resource_name)
   end
 
   private
@@ -55,7 +54,6 @@ class Public::UsersController < ApplicationController
   end
 
   def ensure_correct_user
-    # user = User.find(params[:id])
     user = current_user
     unless user.id == current_user.id
       redirect_to users_my_page_path
