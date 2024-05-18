@@ -1,23 +1,24 @@
+<div>新規投稿ページ</div>
 <%= form_with model: @post do |f| %>
-<%= render "public/shared/error_messages", resource: @post %>
+  <%= render "public/shared/error_messages", resource: @post %>
   <div class="field">
-    <%= f.label :"タイトル" %><br />
+    <%= f.label :title, "タイトル" %><br />
     <%= f.text_field :title, autofocus: true %>
   </div>
 
   <div class="image_field">
-    <%= f.label :image, "画像" %>
-    <%= f.file_field :user_image,  accept:'user_image/*' %>
+    <%= f.label :post_image, "画像" %>
+    <%= f.file_field :post_image, accept:'post_image/*' %>
   </div>
 
   <div class="field">
-    <%= f.label :"内容" %><br />
+    <%= f.label :body, "内容" %><br />
     <%= f.text_area :body %>
   </div>
-<!--カテゴリは仮置き（エラーが出る）-->
-  <!--<div class="field">-->
-  <!--  <%= f.label :"カテゴリ" %><br />-->
-  <!--  <%= f.select :category,Post.categories.map %>-->
-  <!--</div>-->
+カテゴリは仮置き（エラーが出る）
+  <div class="field">
+    <%= f.label :category, "カテゴリ" %><br />
+    <%= f.select :category, Post.categories.keys.map { |c| [c, c] } %>
+  </div>
   <%= f.submit "投稿内容を確定" %>
 <% end %>

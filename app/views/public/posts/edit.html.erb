@@ -2,12 +2,19 @@
 <%= form_with model: @post do |f| %>
   <%= render "public/shared/error_messages", resource: @post %>
   <div class="field">
-    <%= f.label :"タイトル" %><br />
+    <%= f.label :title, "タイトル" %><br />
     <%= f.text_field :title, autofocus: true %>
   </div>
 
+<%= image_tag @post.get_post_image, size: '100x100' %>
+
+  <div class="image_field">
+    <%= f.label :post_image, "画像" %>
+    <%= f.file_field :post_image, accept:'post_image/*' %>
+  </div>
+
   <div class="field">
-    <%= f.label :"内容" %><br />
+    <%= f.label :body, "内容" %><br />
     <%= f.text_area :body %>
   </div>
 

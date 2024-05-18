@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  # get "search" => "searches#search", as: "search"
 
   # 管理者側
   devise_for :admin, skip: [:registrations, :passwords] , controllers: {

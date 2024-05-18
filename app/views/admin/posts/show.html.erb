@@ -1,0 +1,38 @@
+admin POST SHOW
+
+<div><%= link_to "投稿を削除する", post_path(@post), method: :delete %></div>
+
+<div>
+  <%= form_with model: @post,url: admin_post_path(@post) do |f| %>
+    <div>
+      <%= f.radio_button :is_public, true, id: "active", class: "form-check-input" %>
+      <%= f.label :is_public_true, "表示", class: "form-check-label", for: "active" %>
+    </div>
+    <div>
+      <%= f.radio_button :is_public, false, id: "active", class: "form-check-input" %>
+      <%= f.label :is_public_false, "非表示", class: "form-check-label", for: "active" %>
+    </div>
+    <div>
+      <%= f.submit %>
+    </div>
+  <% end %>
+</div>
+
+<div>表示ステータス:
+<% if @post.is_public == true %>
+  表示中
+<% else %>
+  非表示中
+<% end %>
+</div>
+
+<div><%= @post.category %></div>
+<div><%= @post.title %></div>
+<%= image_tag @post.user.get_user_image, size: '100x100' %>
+<div><%= @post.body %></div>
+
+<!--新規コメント-->
+新しいコメントの投稿
+<table class="comment-list">
+  <%= render "public/comments/comment_list", post: @post %>
+</table>

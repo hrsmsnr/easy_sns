@@ -7,7 +7,10 @@ class Public::PostsController < ApplicationController
   end
 
   def index
-    @posts = Post.all
+    @usual_posts = Post.where(category:0)
+    @lifehack_posts = Post.where(category:1)
+    @play_posts = Post.where(category:2)
+    @dish_posts = Post.where(category:3)
   end
 
   def show
@@ -52,7 +55,7 @@ class Public::PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:title,:body,:category)
+    params.require(:post).permit(:title,:post_image,:body,:category)
   end
 
   def is_matching_login_user

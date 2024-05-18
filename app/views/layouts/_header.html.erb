@@ -1,7 +1,12 @@
 <header class="vw-100 border-bottom border-dark align-items-center" style="min-height:125px">
   <h1 class="text-primary">かんたんSNS</h1>
   <%= link_to "about" , about_path %>
-  <% if user_signed_in? %>
+  <% if admin_signed_in? %>
+    <%= link_to "ホーム" , admin_root_path %>
+    <%= link_to "ユーザー一覧" , admin_users_path %>
+    <%= link_to "投稿一覧" , admin_posts_path %>
+    <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
+  <% elsif user_signed_in? %>
     <%= link_to "マイページ" , users_my_page_path %>
     <%= link_to "ユーザー一覧" , users_path %>
     <%= link_to "新規投稿", new_post_path %>
