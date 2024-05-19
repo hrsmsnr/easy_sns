@@ -1,4 +1,5 @@
-POST SHOW
+<div>投稿詳細ページ</div>
+
 <% if @post.user_id == current_user.id %>
   <div><%= link_to "投稿を編集する", edit_post_path(@post) %></div>
 <% end %>

@@ -1,5 +1,7 @@
 <div>新規投稿ページ</div>
-<%= form_with model: @post do |f| %>
+
+
+<%= form_with model: @post, id: 'post_preview' do |f| %>
   <%= render "public/shared/error_messages", resource: @post %>
   <div class="field">
     <%= f.label :title, "タイトル" %><br />
@@ -7,6 +9,7 @@
   </div>
 
   <div class="image_field">
+    <div id="previews"></div>
     <%= f.label :post_image, "画像" %>
     <%= f.file_field :post_image, accept:'post_image/*' %>
   </div>
@@ -15,7 +18,7 @@
     <%= f.label :body, "内容" %><br />
     <%= f.text_area :body %>
   </div>
-カテゴリは仮置き（エラーが出る）
+
   <div class="field">
     <%= f.label :category, "カテゴリ" %><br />
     <%= f.select :category, Post.categories.keys.map { |c| [c, c] } %>

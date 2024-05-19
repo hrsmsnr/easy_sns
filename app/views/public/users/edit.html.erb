@@ -1,32 +1,37 @@
-users edit
+<div>ユーザー編集ページ</div>
 
-<%= form_with model: @user, url: user_path do |f| %>
+<%= form_with model: @user, id: 'user_preview' , url: user_path do |f| %>
   <%= render "public/shared/error_messages", resource: @user %>
 
   <div class="image_field">
-    <%= f.label :image, "現在の画像" %><br />
-    <%= image_tag (@user.user_image.attached? ? @user.user_image : 'no_image.jpg') %><br />
-    <%= f.file_field :user_image,  accept:'image/*' %>
-    <div class="image-field">
-      <div id="previews"></div>
-      <div class="click-upload">
-        <%= f.file_field :image %>
+    <div class="d-flex">
+      <div class="col-4">
+        変更前の画像<br />
+        <%= image_tag @user.get_user_image, class:"user-preview-image" %>
+      </div>
+      <div class="col-3">
+      </div>
+      <div class="col-4">
+        変更後の画像<br />
+        <div id="previews"></div>
       </div>
     </div>
+    <%= f.label :user_image, "画像" %><br />
+    <%= f.file_field :user_image,  accept:'image/*' %>
   </div>
 
   <div class="field">
-     <%= f.label :"ニックネーム" %><br />
+     <%= f.label :name, "ニックネーム" %><br />
      <%= f.text_field :name, autofocus: true, autocomplete: "name" %>
   </div>
 
   <div class="field">
-     <%= f.label :"自己紹介(空欄でもOK)" %><br />
+     <%= f.label :introduction, "自己紹介(空欄でもOK)" %><br />
      <%= f.text_area :introduction, autocomplete: "introduction" %>
   </div>
 
   <div class="field">
-    <%= f.label :"メールアドレス" %><br />
+    <%= f.label :email, "メールアドレス" %><br />
     <%= f.email_field :email, autocomplete: "email" %>
   </div>
 
