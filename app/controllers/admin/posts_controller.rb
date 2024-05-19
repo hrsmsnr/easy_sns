@@ -13,7 +13,7 @@ class Admin::PostsController < ApplicationController
   def update
     post = Post.find(params[:id])
     if post.update(post_params)
-      redirect_to post
+      redirect_to admin_post_path(post)
     else
       render :show
     end
@@ -27,7 +27,7 @@ class Admin::PostsController < ApplicationController
 
   private
   # 投稿ステータス変更用
-  def user_params
-    params.require(:user).permit(:is_public)
+  def post_params
+    params.require(:post).permit(:is_public)
   end
 end

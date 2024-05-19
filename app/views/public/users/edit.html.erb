@@ -10,6 +10,7 @@
         <%= image_tag @user.get_user_image, class:"user-preview-image" %>
       </div>
       <div class="col-3">
+        →
       </div>
       <div class="col-4">
         変更後の画像<br />
@@ -40,4 +41,4 @@
   </div>
 <% end %>
 </br>
-<div><%= link_to "退会する", users_withdraw_path, method: :patch, class: "btn" %></div>
+<div><%= link_to "退会する", users_withdraw_path, method: :patch, class: "btn btn-danger" %></div>
