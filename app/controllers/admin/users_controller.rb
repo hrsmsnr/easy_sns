@@ -1,6 +1,6 @@
 class Admin::UsersController < ApplicationController
   def index
-    @users = User.all
+    @users = User.all.order("created_at DESC")
   end
 
   def show
@@ -10,11 +10,8 @@ class Admin::UsersController < ApplicationController
 
   def update
     user = User.find(params[:id])
-    if user.update(user_params)
-      redirect_to user
-    else
-      render :show
-    end
+    user.update(user_params)
+    redirect_to admin_user_path(user)
   end
 
   def destroy

@@ -30,6 +30,13 @@ admin POST SHOW
 <div><%= @post.title %></div>
 <%= image_tag @post.user.get_user_image, size: '100x100' %>
 <div><%= @post.body %></div>
+<!--詳細内容-->
+<% unless @post_category == "通常" %>
+  <% @post_details.each do |post_detail| %>
+    <div><%= post_detail.sequence_number %></div>
+    <div><%= post_detail.body %></div>
+  <% end %>
+<% end %>
 
 <!--新規コメント-->
 新しいコメントの投稿

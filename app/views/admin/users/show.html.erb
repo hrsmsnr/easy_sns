@@ -1,11 +1,17 @@
-admin users show
-
+<h1>[管理]<%= @user.name %>のページ</h1>
 <div><%= @user.name %></div>
 <div><%= @user.introduction %></div>
 <div><%= @user.email %></div>
 <div>フォロー:<%= @user.followers.count %>人</div>
 <div>フォロワー:<%= @user.followeds.count %>人</div>
 <div><%= @user.posts.count %></div>
+<div>ステータス:
+<% if @user.is_active == true %>
+  有効
+<% else %>
+  退会済み
+<% end %>
+</div>
 <div>
   <%= form_with model: @user,url: admin_user_path(@user) do |f| %>
     <div>
@@ -17,14 +23,14 @@ admin users show
       <%= f.label :is_active_false, "退会", class: "form-check-label", for: "active" %>
     </div>
     <div>
-      <%= f.submit %>
+      <%= f.submit "ステータス更新" %>
     </div>
   <% end %>
 </div>
 
 <% @posts.each do |post| %>
   <div class="flex-column border">
-    <%= link_to post_path(post.id) do %>
+    <%= link_to admin_post_path(post.id) do %>
       <div>
         <%= post.title %>
       </div>
