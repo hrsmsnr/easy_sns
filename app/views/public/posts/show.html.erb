@@ -22,6 +22,13 @@
 <div>^<%= @post.title %>^</div>
 <%= image_tag @post.get_post_image, size: '100x100' %>
 <div><%= @post.body %></div>
+<!--詳細-->
+<% unless @post_category == "通常" %>
+  <% @post_details.each do |post_detail| %>
+    <div><%= post_detail.sequence_number %></div>
+    <div><%= post_detail.body %></div>
+  <% end %>
+<% end %>
 
 <!--新規コメント-->
 コメント

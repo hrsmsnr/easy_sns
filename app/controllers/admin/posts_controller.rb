@@ -1,13 +1,15 @@
 class Admin::PostsController < ApplicationController
   def index
-    @usual_posts = Post.where(category:0)
-    @lifehack_posts = Post.where(category:1)
-    @play_posts = Post.where(category:2)
-    @dish_posts = Post.where(category:3)
+    @usual_posts = Post.where(category:0).order("created_at DESC")
+    @lifehack_posts = Post.where(category:1).order("created_at DESC")
+    @play_posts = Post.where(category:2).order("created_at DESC")
+    @dish_posts = Post.where(category:3).order("created_at DESC")
   end
 
   def show
     @post = Post.find(params[:id])
+    @post_details = @post.post_details
+    @comments = @post.comments
   end
 
   def update

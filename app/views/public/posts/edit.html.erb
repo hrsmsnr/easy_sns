@@ -1,6 +1,6 @@
 <div>投稿編集ページ</div>
 
-<%= form_with model: @post, id: 'post_preview' do |f| %>
+<%= form_with model: @post, id: 'post_form' do |f| %>
   <%= render "public/shared/error_messages", resource: @post %>
   <!--タイトルフォーム-->
   <div class="field">
@@ -28,6 +28,17 @@
     <%= f.label :body, "内容" %><br />
     <%= f.text_area :body %>
   </div>
+
+  <% unless @post.category == "通常" %>
+    <div id="post-details">
+      <%= f.fields_for :post_details do |detail_form| %>
+        <%= render 'post_detail_fields', f: detail_form %>
+      <% end %>
+      <div class="links">
+        <%= link_to_add_association '手順を追加', f, :post_details, class: 'btn btn-secondary' %>
+      </div>
+    </div>
+  <% end %>
 
   <%= f.submit "投稿を更新" %>
 <% end %>

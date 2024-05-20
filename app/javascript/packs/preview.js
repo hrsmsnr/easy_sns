@@ -1,14 +1,13 @@
 function setupImagePreview() {
   // 新規投稿・編集ページのフォームを取得
   // const postForm = document.getElementById('new_post') || document.getElementById('edit_post');
-  const postForm = document.getElementById('post_preview') || document.getElementById('user_preview');
+  const postForm = document.getElementById('post_form') || document.getElementById('user_form');
   // プレビューを表示するためのスペースを取得
   const previewList = document.getElementById('previews');
   // 新規投稿・編集ページのフォームがないならここで終了
   if (!postForm) return null;
 
   // 複数のinput要素を取得
-  // const fileFields = document.querySelectorAll('input[type="file"][name^="post["]');
   const fileFields = document.querySelectorAll('input[type="file"][name^="post[post_image]"], input[type="file"][name^="user[user_image]"]');
 
   fileFields.forEach(fileField => {

@@ -1,6 +1,6 @@
 <div>ユーザー編集ページ</div>
 
-<%= form_with model: @user, id: 'user_preview' , url: user_path do |f| %>
+<%= form_with model: @user, id: 'user_form' , url: user_path do |f| %>
   <%= render "public/shared/error_messages", resource: @user %>
 
   <div class="image_field">
