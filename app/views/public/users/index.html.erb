@@ -26,12 +26,11 @@
               </div>
             <% end %>
           </td>
-          <td><%= link_to 'Show', user_path(user.id) %></td>
         <% else %>
-        <!--ログイン中のユーザーはフォローボタンなしリンクをmy_pageに変更-->
+        <!--ログイン中のユーザーはフォローボタンなしに変更-->
           <td></td>
-          <td><%= link_to 'Show', user_path(user.id) %></td>
         <% end %>
+        <td><%= link_to 'Show', user_path(user.id) %></td>
       </tr>
     <% end %>
   </tbody>

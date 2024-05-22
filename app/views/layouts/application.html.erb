@@ -14,19 +14,10 @@
   </head>
 
   <body>
-    <!--topページでヘッダーを非表示-->
-    <% if current_page?(root_path) %>
-    <!--aboutページで非ログイン時ヘッダーを非表示-->
-    <% elsif current_page?(about_path) %>
-      <% if user_signed_in? %>
-        <%= render 'layouts/header' %>
-      <% end %>
-    <% else %>
-      <%= render 'layouts/header' %>
-    <% end %>
 
-    <main class="min-vh-100" style="background-color:#fffdf7;">
-      <div class="container">
+    <main class="d-flex flex-column min-vh-100">
+      <%= render 'layouts/header' %>
+      <div class="container flex-grow-1 my-4">
         <%= yield %>
       </div>
     </main>

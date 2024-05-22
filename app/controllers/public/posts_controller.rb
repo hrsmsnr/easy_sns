@@ -1,6 +1,6 @@
 class Public::PostsController < ApplicationController
   before_action :authenticate_user!
-  before_action :is_matching_login_user, only: [:edit, :update]
+  before_action :is_matching_login_user, only: [:edit, :update, :destroy]
 
   def new
     @post = Post.new
@@ -27,11 +27,10 @@ class Public::PostsController < ApplicationController
     @post.user_id = current_user.id
     if @post.save
       assign_sequence_numbers
+      flash[:success] = "新規投稿が完了しました"
       redirect_to post_path(@post)
     else
-      @post = Post.new
-      detail = @post.post_details.build
-      detail.sequence_number = 1
+      flash.now[:error] = "投稿に失敗しました"
       render :new
     end
   end
@@ -44,8 +43,10 @@ class Public::PostsController < ApplicationController
   def update
     @post = Post.find(params[:id])
     if @post.update(post_params)
+      flash[:success] = "投稿情報の更新が完了しました"
       redirect_to post_path(@post)
     else
+      flash.now[:error] = "更新に失敗しました"
       render :edit
     end
   end
@@ -53,6 +54,7 @@ class Public::PostsController < ApplicationController
   def destroy
     post = Post.find(params[:id])
     post.destroy
+    flash[:success] = '投稿の削除が完了しました'
     redirect_to users_my_page_path
   end
 

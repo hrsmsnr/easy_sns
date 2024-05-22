@@ -1,3 +1,4 @@
+<div class="text-center text-danger"><%= flash[:error] %></div>
 <div>ユーザー編集ページ</div>
 
 <%= form_with model: @user, id: 'user_form' , url: user_path do |f| %>

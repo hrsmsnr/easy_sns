@@ -1,5 +1,5 @@
+<div class="text-center text-danger"><%= flash[:error] %></div>
 <div>新規投稿ページ</div>
-
 
 <%= form_with model: @post, id: 'post_form', local: true do |f| %>
   <%= render "public/shared/error_messages", resource: @post %>

@@ -33,7 +33,7 @@ Rails.application.routes.draw do
 
     end
     get 'users/:id/unsubsribe' => 'users#unsubscribe'
-    patch 'users/:id/withdraw' => 'users#withdraw'
+    patch 'users/:id/withdraw' => 'user#withdraw'
 
 
     # get 'posts/:category' => 'posts#index'
