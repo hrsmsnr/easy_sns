@@ -1,3 +1,4 @@
+<div class="text-center text-danger"><%= flash[:error] %></div>
 <div>投稿編集ページ</div>
 
 <%= form_with model: @post, id: 'post_form' do |f| %>
@@ -29,7 +30,7 @@
     <%= f.text_area :body %>
   </div>
 
-  <% unless @post.category == "通常" %>
+  <% unless @post.category == "日常" %>
     <div id="post-details">
       <%= f.fields_for :post_details do |detail_form| %>
         <%= render 'post_detail_fields', f: detail_form %>

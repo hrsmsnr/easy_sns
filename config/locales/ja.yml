@@ -1,0 +1,40 @@
+ja:
+  errors:
+    format: "%{attribute} %{message}"
+    messages:
+      record_invalid: "バリデーションに失敗しました: %{errors}"
+      blank: "を入力してください"
+      taken: "はすでに存在します"
+      too_short: "は%{count}文字以上で入力してください"
+      too_long: "は%{count}文字以下で入力してください"
+      not_found: は見つかりませんでした。
+      not_saved:
+        one: エラーが発生したため %{resource} は保存されませんでした。
+        other: "%{count} 件のエラーが発生したため %{resource} は保存されませんでした。"
+  activerecord:
+    models:
+      post: "投稿情報"
+      user: "ユーザー情報"
+    attributes:
+      post:
+        title: "タイトル"
+        body: "内容"
+      user:
+        email: "メールアドレス"
+        name: "ニックネーム"
+        password: "パスワード"
+    errors:
+      models:
+        post:
+          attributes:
+            title:
+              blank: "を入力してください"
+            body:
+              blank: "を入力してください"
+        user:
+          attributes:
+            email:
+              blank: "を入力してください"
+            name:
+              blank: "を入力してください"
+              too_short: "は%{count}文字以上で入力してください"

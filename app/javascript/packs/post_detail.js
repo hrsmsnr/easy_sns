@@ -11,7 +11,7 @@ document.addEventListener('turbolinks:load', function() {
   function togglePostDetails() {
     const category = $('#post_category').val();
     console.log("Selected category:", category);
-    if (category === "通常") {
+    if (category === "日常") {
       $('#post-details').hide();
     } else {
       $('#post-details').show();
@@ -34,7 +34,7 @@ document.addEventListener('turbolinks:load', function() {
 
   $('#post_form').on('submit', function() {
     const category = $('#post_category').val();
-    if (category === "通常") {
+    if (category === "日常") {
       // フィールドを無効にする
       $('#post-details').find('input, textarea').attr('disabled', true);
     } else {

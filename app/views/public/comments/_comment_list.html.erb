@@ -1,19 +1,26 @@
 <% post.comments.each do |comment| %>
-  <tr>
+  <tr class="border">
     <td>
-    <%= link_to user_path(comment.user) do %>
-      <%= image_tag comment.user.get_user_image, size: "50x50" %><br>
-      <%= comment.user.name %>
-    <% end %>
+      <% if admin_signed_in? %>
+        <%= link_to admin_user_path(comment.user) do %>
+          <%= image_tag comment.user.get_user_image, size: "50x50" %><br>
+          <%= comment.user.name %>
+        <% end %>
+      <% else %>
+        <%= link_to user_path(comment.user) do %>
+          <%= image_tag comment.user.get_user_image, size: "50x50" %><br>
+          <%= comment.user.name %>
+        <% end %>
+      <% end %>
     </td>
 
     <td>
-    <%= comment.body %>
+      <%= comment.body %>
     </td>
     <td>
-    <% if comment.user == current_user || admin_signed_in? %>
-      <%= link_to "コメント削除", post_comment_path(comment.post,comment), method: :delete, remote: true, class: "btn-sm btn-danger" %>
-    <% end %>
+      <% if comment.user == current_user || admin_signed_in? %>
+        <%= link_to "コメント削除", post_comment_path(comment.post,comment), method: :delete, remote: true, class: "btn-sm btn-danger text-top" %>
+      <% end %>
     </td>
   <tr>
 <% end %>

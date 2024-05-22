@@ -1,45 +1,103 @@
-<div>投稿詳細ページ</div>
+<div class="text-center text-success"><%= flash[:success] %></div>
+<div class="text-center text-danger"><%= flash[:error] %></div>
+<h1>投稿詳細ページ</h1>
 
-<% if @post.user_id == current_user.id %>
-  <div><%= link_to "投稿を編集する", edit_post_path(@post) %></div>
-<% end %>
+<div>
+  <div class="row p-0 m-0">
+    <div class="col-5 item-left m-2">
+      <%= link_to user_path(@post.user_id) do %>
+        <%= image_tag @post.user.get_user_image, size: '50x50' %>
+        <span class="ml-2"><%= @post.user.name %></span>
+      <% end %>
+    </div>
+    <% if @post.user_id == current_user.id %>
+      <div class="col-6 text-right m-2">
+        <%= link_to "投稿を編集する", edit_post_path(@post), class:"btn btn-success" %>
+        <%= link_to "投稿を削除する", post_path(@post), class:"btn btn-danger", method: :delete %>
+      </div>
+    <% end %>
+  </div>
 
-<% if @post.user_id == current_user.id %>
-  <div><%= link_to "投稿を削除する", post_path(@post), method: :delete %></div>
-<% end %>
+    <!--投稿ステータスによって表示の変更・投稿者には表示-->
+    <% if @post.is_public? || @post.user == current_user %>
+      <div class="card border-dark my-2" style="min-height:300px">
 
-<div>表示ステータス:
-<% if @post.is_public == true %>
-  表示中
-<% else %>
-  非表示中
-<% end %>
-</div>
-<div><%= image_tag @post.user.get_user_image, size: '50x50' %><%= @post.user.name %></div>
+        <div class="p-2 m-0 row card-header border-dark">
+          <div class="col" style:"object-fit: contain;">
+            <%= link_to user_path(@post.user_id) do %>
+              <%= image_tag @post.user.get_user_image, size: '50x50' %>
+              <span class="ml-2"><%= @post.user.name %></span>
+            <% end %>
+          </div>
+          <% if @post.user == current_user %>
+            <% if @post.is_public? %>
+              <div class="text-right align-content-center m-2">
+                <span class="p-2 rounded-lg bg-success text-light">公開中</span>
+              </div>
+            <% else %>
+              <div class="text-right align-content-center m-2">
+                <span class="p-2 rounded-lg bg-danger text-light">非公開</span>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
 
+        <div class="row p-0 m-0">
+          <div class="col-lg-8 border-right">
+            <div class="py-2 px-4 m-0 row justify-content-between">
+              <h4 style="background-color:#eee;"><%= @post.title %></h4>
+              カテゴリ：<%= @post.category %>
+            </div>
 
-<div>|<%= @post.category %>|</div>
-<div>^<%= @post.title %>^</div>
-<%= image_tag @post.get_post_image, size: '100x100' %>
-<div><%= @post.body %></div>
-<!--詳細-->
-<% unless @post_category == "通常" %>
-  <% @post_details.each do |post_detail| %>
-    <div><%= post_detail.sequence_number %></div>
-    <div><%= post_detail.body %></div>
-  <% end %>
-<% end %>
+            <% if @post.post_image.attached? %>
+              <div>
+                <%= image_tag @post.post_image, style:"max-height:250px; width:100%; object-fit: contain;" %>
+              </div>
+            <% else %>
+              <!--非表示-->
+            <% end %>
+            <div class="p-2 m-0">
+              <div class="border">
+                <%= simple_format(@post.body) %>
+              </div>
+            </div>
 
-<!--新規コメント-->
-コメント
-<table class="comment-list">
-  <%= render "public/comments/comment_list", post: @post %>
-</table>
+            <!--詳細-->
+            <div class="p-2 m-0">
+              <% unless @post_category == "日常" %>
 
-新しいコメントの投稿
-<div class="form-model">
-  <%= form_with model: [@post, @comment], local: false do |f| %>
-    <%= f.text_area :body,class: "comment-text" %>
-    <%= f.submit "送信" %>
-  <% end %>
+                <% @post_details.each do |post_detail| %>
+                  <strong><%= post_detail.sequence_number %>.</strong>
+                  <div class="pl-4 border"><%= post_detail.body %></div>
+                <% end %>
+              <% end %>
+            </div>
+
+            <div class="text-right pr-3">
+              <p>投稿日：<%= @post.created_at.strftime('%Y年%m月%d日') %></p>
+            </div>
+          </div>
+          <!--コメント欄-->
+          <div class="col-lg-2 border-left">
+            <h5>コメント欄</h5>
+            新しいコメントの投稿
+            <div class="form-model">
+              <%= form_with model: [@post, @comment], local: false do |f| %>
+                <%= f.text_area :body,class: "comment-text" %>
+                <%= f.submit "送信" %>
+              <% end %>
+            </div>
+
+            コメント
+            <table class="comment-list w-100">
+              <%= render "public/comments/comment_list", post: @post %>
+            </table>
+          </div>
+        </div>
+
+      </div>
+    <% else %>
+      <!--非表示-->
+      この投稿は非表示になっています
+    <% end %>
 </div>

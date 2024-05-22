@@ -1,6 +1,12 @@
 admin POST SHOW
 
-<div><%= link_to "投稿を削除する", post_path(@post), method: :delete %></div>
+<div>
+  <%= link_to admin_user_path(@post.user_id) do %>
+    <%= @post.user.name %>
+  <% end %>
+</div>
+
+<div><%= link_to "投稿を削除する", admin_post_path(@post), method: :delete %></div>
 
 <div>
   <%= form_with model: @post,url: admin_post_path(@post) do |f| %>
@@ -19,11 +25,11 @@ admin POST SHOW
 </div>
 
 <div>表示ステータス:
-<% if @post.is_public == true %>
-  表示中
-<% else %>
-  非表示中
-<% end %>
+  <% if @post.is_public == true %>
+    表示中
+  <% else %>
+    非表示中
+  <% end %>
 </div>
 
 <div><%= @post.category %></div>
@@ -31,7 +37,7 @@ admin POST SHOW
 <%= image_tag @post.user.get_user_image, size: '100x100' %>
 <div><%= @post.body %></div>
 <!--詳細内容-->
-<% unless @post_category == "通常" %>
+<% unless @post_category == "日常" %>
   <% @post_details.each do |post_detail| %>
     <div><%= post_detail.sequence_number %></div>
     <div><%= post_detail.body %></div>

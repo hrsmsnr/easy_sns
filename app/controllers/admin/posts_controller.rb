@@ -1,4 +1,6 @@
 class Admin::PostsController < ApplicationController
+  before_action :authenticate_admin!
+
   def index
     @usual_posts = Post.where(category:0).order("created_at DESC")
     @lifehack_posts = Post.where(category:1).order("created_at DESC")

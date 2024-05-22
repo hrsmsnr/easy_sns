@@ -1,13 +1,18 @@
-users show
+<div class="text-center text-success"><%= flash[:success] %></div>
 <% if @user == current_user %>
+  <h1>マイページ</h1>
   <div class="btn"><%= link_to "編集ボタン", edit_user_path(current_user.id) %></div>
+<% else %>
+  <h1><%= @user.name %></h1>
 <% end %>
-<div><%= @user.name %></div>
+<div><%= image_tag @user.get_user_image, size: '100x100' %></div>
 <div><%= @user.introduction %></div>
-<div><%= @user.email %></div>
+<% if @user == current_user %>
+  <div><%= @user.email %></div>
+<% end %>
 <div>フォロー:<%= @user.followers.count %>人</div>
 <div>フォロワー:<%= @user.followeds.count %>人</div>
-<div><%= @user.posts.count %></div>
+<div>投稿数:<%= @user.posts.count %></div>
 
 <% @posts.each do |post| %>
   <div class="flex-column border">

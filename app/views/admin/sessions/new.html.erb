@@ -1,28 +1,33 @@
-<h2>管理者ログイン</h2>
-
-<%= form_with scope: :admin, url: admin_session_path, local: true do |f| %>
-  <%= render "public/shared/error_messages", resource: resource %>
-
-  <div class="field">
-    <%= f.label :login, "メールアドレス"%><br />
-    <%= f.email_field :login, autofocus: true, autocomplete: "email" %>
+<div class="row pb-5">
+  <div class="col-10 offset-sm-2">
+    <h2 class="px-3" style="background-color:#eee; width:fit-content;">管理者ログイン</h2>
   </div>
+</div>
 
-  <div class="field">
-    <%= f.label :password, "パスワード" %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
+<%= form_with model: @admin, url: admin_session_path, local: true do |f| %>
 
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me, "次回の入力を省略" %>
+  <div class="row py-3 text-center">
+    <div class="col-sm-4 offset-sm-1">
+      <%= f.label :email, "メールアドレス", class: "w-100" %><br />
     </div>
-  <% end %>
-
-  <div class="actions">
-    <%= f.submit "ログイン" %>
+    <div class="col-sm-5">
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "w-100" %>
+    </div>
   </div>
-<% end %>
 
-<%= render "admin/shared/links" %>
+  <div class="row py-3 text-center">
+    <div class="col-sm-4 offset-sm-1">
+      <%= f.label :password, "パスワード", class: "w-100" %><br />
+    </div>
+    <div class="col-sm-5">
+      <%= f.password_field :password, autocomplete: "current-password", class: "w-100" %>
+    </div>
+  </div>
+
+  <div class="row py-3">
+    <div class="col text-center">
+      <%= f.submit "ログイン", class:"btn btn-primary px-5 mt-3 mb-5" %>
+    </div>
+  </div>
+
+<% end %>
