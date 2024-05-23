@@ -1,0 +1,13 @@
+// .preview-image {
+//   object-fit: cover; /* 画像をコンテナに収めるためのオプション */
+// }
+
+.user-preview-image {
+  max-height: 130px;
+  max-width: 130px;
+}
+
+.post-preview-image {
+  height: 300px;
+  max-width: 500px;
+}
