@@ -1,29 +1,63 @@
 <div class="text-center text-success"><%= flash[:success] %></div>
+
 <% if @user == current_user %>
   <h1>マイページ</h1>
-  <div class="btn"><%= link_to "編集ボタン", edit_user_path(current_user.id) %></div>
 <% else %>
-  <h1><%= @user.name %></h1>
+  <h1><%= @user.name %>のページ</h1>
 <% end %>
-<div><%= image_tag @user.get_user_image, size: '100x100' %></div>
-<div><%= @user.introduction %></div>
-<% if @user == current_user %>
-  <div><%= @user.email %></div>
-<% end %>
-<div>フォロー:<%= @user.followers.count %>人</div>
-<div>フォロワー:<%= @user.followeds.count %>人</div>
-<div>投稿数:<%= @user.posts.count %></div>
 
-<% @posts.each do |post| %>
-  <div class="flex-column border">
-    <%= link_to post_path(post.id) do %>
-      <div>
-        <%= post.title %>
-      </div>
-      <div>
-        <%= image_tag post.get_post_image, size: '90x90' %>
-        <%= post.body %>
-      </div>
-    <% end %>
+<div class ="d-flex p-3 mt-4 m-0 border border-dark" style="min-height:250px; max-wigth:auto;">
+  <div class="col-3">
+    <%= image_tag @user.get_user_image, style:"height:220px; wigth:auto;" %>
   </div>
-<% end %>
+
+  <div class="col-3">
+    <div>
+      <h5>ユーザーネーム</h5>
+      <h4 class="pb-1 text-center rounded-lg" style="background-color:#eee;"><%= @user.name %></h4>
+    </div>
+    <div>
+      <h5>自己紹介</h5>
+    </div>
+    <div class="rounded-lg p-1 pb-auto" style="min-height:110px; background-color:#eee;">
+      <p><%= simple_format(@user.introduction) %></p>
+    </div>
+  </div>
+
+  <div class="col-3">
+    <div>
+      <h5>投稿数</h5>
+      <h4 class="pb-1 text-center rounded-lg" style="background-color:#eee;"><%= @user.posts.count %> 件</h4>
+    </div>
+    <div>
+      <h5>フォロー</h5>
+      <h4 class="pb-1 text-center rounded-lg" style="background-color:#eee;"><%= @user.followers.count %> 人</h4>
+    </div>
+    <div>
+      <h5>フォロワー</h5>
+      <h4 class="pb-1 text-center rounded-lg" style="background-color:#eee;"><%= @user.followeds.count %> 人</h4>
+    </div>
+  </div>
+
+  <div class="col-3">
+    <div>
+      <h5 class="text-center">ユーザー編集ボタン</h5>
+      <div class="pb-1 text-center"><%= link_to "編集", edit_user_path(current_user.id),class:"btn btn-success" %></div>
+    </div>
+    <div>
+      <h5>合計いいね数</h5>
+      <h4 class="pb-1 text-center rounded-lg" style="background-color:#eee;"><%= @favorites_count %> 件</h4>
+    </div>
+    <div>
+      <h5>合計コメント数</h5>
+      <h4 class="pb-1 text-center rounded-lg" style="background-color:#eee;"><%= @comments_count %> 件</h4>
+    </div>
+  </div>
+</div>
+
+<h2 class="py-2 text-center"><%= @user.name %>の投稿一覧</h2>
+<!--投稿一覧-->
+<div>
+  <%= render "public/posts/list", posts: @posts %>
+</div>
+

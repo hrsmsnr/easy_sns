@@ -1,26 +1,30 @@
 <% post.comments.each do |comment| %>
-  <tr class="border">
-    <td>
+  <div class="border">
+    <div class="d-flex justify-content-between">
       <% if admin_signed_in? %>
         <%= link_to admin_user_path(comment.user) do %>
-          <%= image_tag comment.user.get_user_image, size: "50x50" %><br>
-          <%= comment.user.name %>
+          <div>
+            <%= image_tag comment.user.get_user_image, size: "40x40" %>
+            <%= comment.user.name %>
+          </div>
         <% end %>
       <% else %>
         <%= link_to user_path(comment.user) do %>
-          <%= image_tag comment.user.get_user_image, size: "50x50" %><br>
-          <%= comment.user.name %>
+          <div>
+            <%= image_tag comment.user.get_user_image, size: "40x40" %>
+            <%= comment.user.name %>
+          </div>
         <% end %>
       <% end %>
-    </td>
 
-    <td>
-      <%= comment.body %>
-    </td>
-    <td>
       <% if comment.user == current_user || admin_signed_in? %>
-        <%= link_to "コメント削除", post_comment_path(comment.post,comment), method: :delete, remote: true, class: "btn-sm btn-danger text-top" %>
+        <div class="pt-2">
+          <%= link_to "コメント削除", post_comment_path(comment.post,comment), method: :delete, remote: true, class: "btn-sm btn-danger text-top" %>
+        </div>
       <% end %>
-    </td>
-  <tr>
+    </div>
+    <div class="p-2">
+      <%= comment.body %>
+    </div>
+  </div>
 <% end %>

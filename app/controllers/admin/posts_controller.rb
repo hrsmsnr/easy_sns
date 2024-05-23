@@ -11,7 +11,7 @@ class Admin::PostsController < ApplicationController
   def show
     @post = Post.find(params[:id])
     @post_details = @post.post_details
-    @comments = @post.comments
+    @comments = @post.comments.order("created_at DESC")
   end
 
   def update

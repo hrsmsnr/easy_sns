@@ -1,51 +1,100 @@
-admin POST SHOW
+<h1>投稿詳細</h1>
 
-<div>
-  <%= link_to admin_user_path(@post.user_id) do %>
-    <%= @post.user.name %>
-  <% end %>
+<div class="row p-0 m-0">
+  <div class="col-5 item-left m-2">
+    <%= link_to admin_user_path(@post.user_id) do %>
+      <%= image_tag @post.user.get_user_image, size: '50x50' %>
+      <span class="ml-2"><%= @post.user.name %></span>
+    <% end %>
+  </div>
 </div>
 
-<div><%= link_to "投稿を削除する", admin_post_path(@post), method: :delete %></div>
 
-<div>
-  <%= form_with model: @post,url: admin_post_path(@post) do |f| %>
-    <div>
-      <%= f.radio_button :is_public, true, id: "active", class: "form-check-input" %>
-      <%= f.label :is_public_true, "表示", class: "form-check-label", for: "active" %>
-    </div>
-    <div>
-      <%= f.radio_button :is_public, false, id: "active", class: "form-check-input" %>
-      <%= f.label :is_public_false, "非表示", class: "form-check-label", for: "active" %>
-    </div>
-    <div>
-      <%= f.submit %>
-    </div>
-  <% end %>
-</div>
-
-<div>表示ステータス:
+<div class="d-flex justify-content-end col-8">
   <% if @post.is_public == true %>
-    表示中
+    <%= form_with model: @post, url: admin_post_path(@post), method: :patch, local: true do |f| %>
+        <%= f.hidden_field :is_public, value: false %>
+        <button type="submit" class="btn btn-secondary m-2">非公開に更新</button>
+    <% end %>
   <% else %>
-    非表示中
+    <%= form_with model: @post, url: admin_post_path(@post), method: :patch, local: true do |f| %>
+        <%= f.hidden_field :is_public, value: true %>
+        <button type="submit" class="btn btn-primary">公開に更新</button>
+    <% end %>
   <% end %>
+
+  <div>
+    <%= link_to "投稿を削除する", admin_post_path(@post), class:"btn btn-danger m-2", method: :delete %>
+  </div>
 </div>
 
-<div><%= @post.category %></div>
-<div><%= @post.title %></div>
-<%= image_tag @post.user.get_user_image, size: '100x100' %>
-<div><%= @post.body %></div>
-<!--詳細内容-->
-<% unless @post_category == "日常" %>
-  <% @post_details.each do |post_detail| %>
-    <div><%= post_detail.sequence_number %></div>
-    <div><%= post_detail.body %></div>
-  <% end %>
-<% end %>
+<div class="d-flex">
+  <div class="card col-md-8 border-dark p-0 m-0" style="min-height:300px">
 
-<!--新規コメント-->
-新しいコメントの投稿
-<table class="comment-list">
-  <%= render "public/comments/comment_list", post: @post %>
-</table>
+    <div class="p-2 px-3 m-0 row card-header border-dark">
+      <div class="col" style:"object-fit: contain;">
+        <h4><%= @post.title %></h4>
+      </div>
+        <% if @post.is_public? %>
+          <div class="text-right align-content-center m-2">
+          <!--投稿ステータスによって公開の変更-->
+            <span class="p-2 rounded-lg bg-success text-light">公開中</span>
+          </div>
+        <% else %>
+          <div class="text-right align-content-center m-2">
+            <span class="p-2 rounded-lg bg-danger text-light">非公開</span>
+          </div>
+        <% end %>
+    </div>
+
+    <div class="row p-0 m-0">
+      <div class="col-lg h-100">
+        <div class="py-2 px-4 m-0 row justify-content-start">
+          カテゴリ：<%= @post.category %>
+        </div>
+
+        <% if @post.post_image.attached? %>
+          <div class="border-bottom">
+            <%= image_tag @post.post_image, style:"max-height:250px; width:100%; object-fit: contain;" %>
+          </div>
+        <% end %>
+        <!--内容-->
+          <div class="p-2 pt-3 m-0">
+            <h5><%= simple_format(@post.body) %></h5>
+          </div>
+
+
+        <!--詳細-->
+        <% unless @post_category == "日常" %>
+          <% @post_details.each do |post_detail| %>
+            <div class="p-2 m-0">
+              <strong><%= post_detail.sequence_number %>.</strong>
+              <div class="pl-4 border"><%= simple_format(post_detail.body) %></div>
+            </div>
+          <% end %>
+        <% end %>
+
+        <div class="mt-auto text-right mx-3">
+          <p>投稿日：<%= @post.created_at.strftime('%Y年%m月%d日') %></p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <div class="card col-md-4 border-dark p-0 m-0" style="min-height:300px">
+    <!--コメント欄-->
+    <div class="p-2 px-3 m-0 row card-header border-dark">
+      <h4>コメント欄</h4>
+    </div>
+
+    <div class="px-2">
+      <h5>コメント</h5>
+      <div class="comment-list w-100">
+        <%= render "public/comments/comment_list", post: @post %>
+      </div>
+    </div>
+  </div>
+
+</div>
