@@ -23,7 +23,6 @@ Rails.application.routes.draw do
     get 'about' => 'homes#about'
     get 'users/my_page' => 'users#show'
 
-    get 'users/unsubscribe' => 'users#unsubscribe'
     patch 'users/withdraw' => 'users#withdraw'
 
     resources :users, only: [:index,:show,:edit,:update] do
@@ -32,14 +31,8 @@ Rails.application.routes.draw do
       get 'followers' => 'users#followers', as: 'followers'
 
     end
-    get 'users/:id/unsubsribe' => 'users#unsubscribe'
     patch 'users/:id/withdraw' => 'user#withdraw'
 
-
-    # get 'posts/:category' => 'posts#index'
-    # get 'posts/:category/new' => 'posts#new'
-
-    #カテゴリ別のタブ分けができたら上二つに切り替え
     resources :posts, only: [:new,:index,:show,:create,:edit,:update,:destroy] do
       resources :comments, only: [:create,:destroy]
       resource :favorite, only: [:create, :destroy]

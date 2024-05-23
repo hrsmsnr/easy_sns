@@ -19,7 +19,7 @@ class Public::PostsController < ApplicationController
     @post = Post.find(params[:id])
     @post_details = @post.post_details.order("sequence_number ASC")
     @comment = Comment.new
-    @comments = @post.comments
+    @comments = @post.comments.order("created_at DESC")
   end
 
   def create

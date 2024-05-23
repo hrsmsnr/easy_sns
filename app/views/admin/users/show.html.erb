@@ -1,43 +1,73 @@
 <h1>[管理]<%= @user.name %>のページ</h1>
-<div><%= @user.name %></div>
-<div><%= @user.introduction %></div>
-<div><%= @user.email %></div>
-<div>フォロー:<%= @user.followers.count %>人</div>
-<div>フォロワー:<%= @user.followeds.count %>人</div>
-<div><%= @user.posts.count %></div>
-<div>ステータス:
-  <% if @user.is_active == true %>
-    有効
-  <% else %>
-    退会済み
-  <% end %>
-</div>
-<div>
-  <%= form_with model: @user,url: admin_user_path(@user) do |f| %>
+
+<div class ="d-flex p-3 mt-4 m-0 border border-dark" style="min-height:250px; max-wigth:auto;">
+  <div class="col-3">
+    <%= image_tag @user.get_user_image, style:"max-height:220px; wigth:auto;" %>
+  </div>
+
+  <div class="col-3">
     <div>
-      <%= f.radio_button :is_active, true, id: "active", class: "form-check-input" %>
-      <%= f.label :is_active_true, "有効", class: "form-check-label", for: "active" %>
+      <h5>ユーザーネーム</h5>
+      <h4 class="pb-1 text-center rounded-lg" style="background-color:#eee;"><%= @user.name %></h4>
     </div>
     <div>
-      <%= f.radio_button :is_active, false, id: "active", class: "form-check-input" %>
-      <%= f.label :is_active_false, "退会", class: "form-check-label", for: "active" %>
+      <h5>自己紹介</h5>
+    </div>
+    <div class="rounded-lg p-1 pb-auto" style="min-height:110px; background-color:#eee;">
+      <p><%= simple_format(@user.introduction) %></p>
+    </div>
+  </div>
+
+  <div class="col-3">
+    <div>
+      <h5>投稿数</h5>
+      <h4 class="pb-1 text-center rounded-lg" style="background-color:#eee;"><%= @user.posts.count %> 件</h4>
     </div>
     <div>
-      <%= f.submit "ステータス更新" %>
+      <h5>フォロー</h5>
+      <h4 class="pb-1 text-center rounded-lg" style="background-color:#eee;"><%= @user.followers.count %> 人</h4>
     </div>
-  <% end %>
+    <div>
+      <h5>フォロワー</h5>
+      <h4 class="pb-1 text-center rounded-lg" style="background-color:#eee;"><%= @user.followeds.count %> 人</h4>
+    </div>
+  </div>
+
+  <div class="col-3">
+    <div class="py-2 d-flex align-items-center">
+      <h5>ステータス ：</h5>
+      <% if @user.is_active == true %>
+        <span class="p-2 rounded-lg bg-primary text-light">有効</span>
+      <% else %>
+        <span class="p-2 rounded-lg bg-secondary text-light">退会済み</span>
+      <% end %>
+    </div>
+    <div class="py-2 px-0">
+      <h5>退会状況変更ボタン：</h5>
+      <div class="text-right">
+        <% if @user.is_active == true %>
+          <%= form_with model: @user, url: admin_user_path(@user), method: :patch, local: true do |f| %>
+              <%= f.hidden_field :is_active, value: false %>
+              <button type="submit" class="btn btn-secondary">退会済に更新</button>
+          <% end %>
+        <% else %>
+          <%= form_with model: @user, url: admin_user_path(@user), method: :patch, local: true do |f| %>
+              <%= f.hidden_field :is_active, value: true %>
+              <button type="submit" class="btn btn-primary">有効に更新</button>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+    <div class="py-2 px-0 border border-danger text-center">
+      <h5>ユーザーの削除</h5>
+      <div><%= link_to "削除", admin_user_path(@user), method: :delete, class:"btn bg-danger text-light" %></div>
+    </div>
+  </div>
 </div>
 
-<% @posts.each do |post| %>
-  <div class="flex-column border">
-    <%= link_to admin_post_path(post.id) do %>
-      <div>
-        <%= post.title %>
-      </div>
-      <div>
-        <%= image_tag post.get_post_image, size: '90x90' %>
-        <%= post.body %>
-      </div>
-    <% end %>
-  </div>
-<% end %>
+<h2 class="py-2 text-center"><%= @user.name %>の投稿一覧</h2>
+<!--投稿一覧-->
+<div>
+  <%= render "admin/posts/list", posts: @posts %>
+</div>
+

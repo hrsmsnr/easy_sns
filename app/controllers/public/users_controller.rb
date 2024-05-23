@@ -19,8 +19,17 @@ class Public::UsersController < ApplicationController
       end
       #----------------------
     end
-
-    @posts = @user.posts
+    @posts = @user.posts.order("created_at DESC")
+    # 全いいね数カウント
+    @favorites_count = 0
+    @posts.each do |post|
+      @favorites_count += post.favorites.count
+    end
+    # 全コメント数カウント
+    @comments_count = 0
+    @posts.each do |post|
+      @comments_count += post.comments.count
+    end
   end
 
   def edit

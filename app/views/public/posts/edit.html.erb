@@ -1,49 +1,82 @@
 <div class="text-center text-danger"><%= flash[:error] %></div>
-<div>投稿編集ページ</div>
+<h1>投稿内容編集</h1>
 
-<%= form_with model: @post, id: 'post_form' do |f| %>
+<%= form_with model: @post, id: 'post_form', local: true do |f| %>
   <%= render "public/shared/error_messages", resource: @post %>
-  <!--タイトルフォーム-->
-  <div class="field">
-    <%= f.label :title, "タイトル" %><br />
-    <%= f.text_field :title, autofocus: true %>
-  </div>
-  <!--画像プレビュー-->
-  <div class="d-flex">
-    <div>
-      変更前の画像<br />
-      <%= image_tag @post.get_post_image, style: "max-height:300px;" %>
-    </div>
-    <div>
-      変更後の画像<br />
-      <div id="previews"></div>
-    </div>
-  </div>
-  <!--画像uploadフォーム-->
-  <div class="image_field">
-    <%= f.label :post_image, "画像" %>
-    <%= f.file_field :post_image, accept:'post_image/*' %>
-  </div>
-  <!--内容フォーム-->
-  <div class="field">
-    <%= f.label :body, "内容" %><br />
-    <%= f.text_area :body %>
-  </div>
 
-  <% unless @post.category == "日常" %>
-    <div id="post-details">
-      <%= f.fields_for :post_details do |detail_form| %>
-        <%= render 'post_detail_fields', f: detail_form %>
-      <% end %>
-      <div class="links">
-        <%= link_to_add_association '手順を追加', f, :post_details, class: 'btn btn-secondary' %>
+  <div class="d-flex">
+    <!--投稿ステータスによって表示の変更・投稿者には表示-->
+    <div class="card col border-dark p-0 m-0" style="min-height:300px">
+
+      <div class="p-2 m-0 row card-header border-dark">
+        <div class="col" style="object-fit: contain;">
+          <div class="field">
+            <%= f.label :title, "タイトル" %>
+            <%= f.text_field :title, autofocus: true %>
+          </div>
+        </div>
+      </div>
+
+      <div class="row p-0 m-0">
+        <div class="col-lg h-100">
+          <div class="py-2 px-4 m-0 row justify-content-start">
+            カテゴリ：<%= @post.category %>
+          </div>
+
+            <div class="border-bottom">
+              <div class="image_field p-2">
+                <div class="d-flex">
+                  <% if @post.post_image.attached? %>
+                     <!--画像プレビュー-->
+                    <div class="border-right">
+                      <h4>変更前の画像</h4>
+                      <%= image_tag @post.get_post_image, style:"max-height:300px;" %>
+                    </div>
+                    <div>
+                      <h4>変更後の画像</h4>
+                      <div id="previews"></div>
+                    </div>
+                  <% else %>
+                    <div id="previews"></div>
+                  <% end %>
+                </div>
+                <%= f.label :post_image, "画像" %>
+                <%= f.file_field :post_image, accept:'image/*'%>
+              </div>
+            </div>
+          <!--内容-->
+            <div class="p-2 pt-3 m-0">
+              <div class="field">
+                <div><%= f.label :body, "内容" %></div>
+                <div><%= f.text_area :body, style:"width:100%;" %></div>
+              </div>
+            </div>
+
+          <!--詳細-->
+          <% unless @post.category == "日常" %>
+            <div class="p-2 m-0">
+              <div id="post-details">
+                <%= f.fields_for :post_details do |detail_form| %>
+                  <%= render 'post_detail_fields', f: detail_form %>
+                <% end %>
+                <div class="links">
+                  <%= link_to_add_association '手順を追加', f, :post_details, class: 'btn btn-secondary' %>
+                </div>
+              </div>
+            </div>
+          <% end %>
+
+          <div class="mt-auto text-right mx-3">
+            <p>投稿日：<%= @post.created_at.strftime('%Y年%m月%d日') %></p>
+          </div>
+        </div>
       </div>
     </div>
-  <% end %>
+  </div>
 
-  <%= f.submit "投稿を更新" %>
+  <div class="btn btn-lg">
+    <%= f.submit "投稿を更新" %>
+  </div>
 <% end %>
 
-<% if @post.user_id == current_user.id %>
-  <div><%= link_to "投稿を削除する", post_path(@post), method: :delete %></div>
-<% end %>
+<div><%= link_to "投稿を削除する", post_path(@post), method: :delete, class:"btn btn-danger" %></div>

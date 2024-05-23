@@ -1,57 +1,70 @@
 <div class="col-lg-6 col-md-8 offset-lg-3 offset-md-2">
   <% posts.each do |post| %>
-    <div class="card border-dark my-2" style="min-height:300px">
-      <!--postヘッダー部分-->
-      <div class="p-2 m-0 row card-header border-dark">
-        <div class="col" style="object-fit: contain;">
-          <%= link_to user_path(post.user_id) do %>
-            <%= image_tag post.user.get_user_image, size: '50x50' %>
-            <span class="ml-2"><%= post.user.name %></span>
-          <% end %>
+      <div class="d-flex flex-column card border-dark my-3" style="min-height:350px">
+        <!--postヘッダー部分-->
+        <div class="p-2 m-0 row border-dark border-bottom">
+          <div class="col" style="object-fit: contain;">
+            <%= link_to admin_user_path(post.user_id) do %>
+              <%= image_tag post.user.get_user_image, size: '50x50' %>
+              <span class="ml-2"><%= post.user.name %></span>
+            <% end %>
+          </div>
+            <!--投稿ステータスによって表示の変更-->
+            <% if post.is_public? %>
+              <div class="text-right align-text-center m-2">
+                <span class="p-2 rounded-lg bg-success text-light">表示中</span>
+              </div>
+            <% else %>
+              <div class="text-right align-text-center m-2">
+                <span class="p-2 rounded-lg bg-danger text-light">非表示中</span>
+              </div>
+            <% end %>
         </div>
-        <!--投稿ステータスによって変更-->
-        <% if post.is_public? %>
-          <div class="text-right align-text-center m-2">
-            <span class="p-2 rounded-lg bg-success text-light">表示中</span>
-          </div>
-        <% else %>
-          <div class="text-right align-text-center m-2">
-            <span class="p-2 rounded-lg bg-danger text-light">非表示中</span>
-          </div>
-        <% end %>
-      </div>
-      <!--タイトル部分-->
-      <div class="py-2 px-4 m-0 row justify-content-between border-bottom">
-        <%= link_to post_path(post.id) do %>
-          <h4><%= post.title %></h4>
-        <% end %>
+        <!--タイトル部分-->
+        <div class="py-2 px-4 m-0 row card-header justify-content-between border-bottom">
+          <%= link_to admin_post_path(post.id) do %>
+            <h4><%= post.title %></h4>
+          <% end %>
           カテゴリ：<%= post.category %>
-      </div>
-
-      <%= link_to post_path(post.id) do %>
-        <div class="p-2 m-0 row">
-          <% if post.post_image.attached? %>
-            <div class="col-5 p-0 m-0">
-              <%= image_tag post.post_image, style:"max-height:200px; width:100%; object-fit: contain;" %>
-            </div>
-          <% else %>
-            <!--非表示-->
-          <% end %>
-          <div class="col-7 p-2 text-dark">
-            <div class="row p-0 m-0">
-              <h5 class="rounded-lg p-1" style="background-color:#eee;">内容</h5>
-            </div>
-            <div class="">
-              <%= simple_format(post.body) %>
-            </div>
-          </div>
         </div>
-      <% end %>
+        <!--画像の有無-->
+        <% if post.post_image.attached? %>
+          <%= link_to admin_post_path(post.id) do %>
+            <div class="p-2 m-0 row flex-grow-1 mb-auto">
+              <div class="col-5 p-0 m-0">
+                <%= image_tag post.post_image, style:"max-height:200px; width:100%; object-fit: contain;" %>
+              </div>
+              <div class="col-7 mb-5 text-dark">
+                <div class="row p-0 m-0">
+                  <h5 class="rounded-lg p-1" style="background-color:#eee;">内容</h5>
+                </div>
+                <div class="rounded-lg p-1 h-100" style="background-color:#eee;">
+                  <%= simple_format(post.body) %>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        <% else %>
+          <%= link_to admin_post_path(post.id) do %>
+            <div class="p-0 m-0 row h-100">
+                <!--画像非表示-->
+              <div class="col mb-5 text-dark">
+                <div class="row pt-2 m-0">
+                  <h5 class="rounded-lg p-1" style="background-color:#eee;">内容</h5>
+                </div>
+                <div class="rounded-lg p-1 min-h-100" style="background-color:#eee;">
+                  <%= simple_format(post.body) %>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
 
-      <div class="text-right pr-3">
-        <p>投稿日：<%= post.created_at.strftime('%Y年%m月%d日') %></p>
+        <div class="m-0 mt-auto d-flex justify-content-between px-3">
+          <p>コメント数：<%= post.comments.count %></p>
+          <p>投稿日：<%= post.created_at.strftime('%Y年%m月%d日') %></p>
+        </div>
+
       </div>
-
-    </div>
   <% end %>
 </div>
