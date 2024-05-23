@@ -15,6 +15,8 @@ import "./preview.js";
 import "./post_detail.js";
 import "cocoon";
 import "../stylesheets/application";
+import "../stylesheets/custom.scss"
+;
 
 //= require jquery
 //= require jquery_ujs
