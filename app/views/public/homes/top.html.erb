@@ -42,6 +42,9 @@
         <button class="btn btn-secondary m-3 w-100 flex-grow-1">かんたんSNSとは</button>
       <% end %>
     </div>
+    <div class="row">
+      <%= link_to 'ゲストログイン', users_guest_sign_in_path, method: :post, class: 'btn btn-secondary' %>
+    </div>
 
   <% end %>
 </div>
