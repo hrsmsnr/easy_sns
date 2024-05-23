@@ -2,6 +2,7 @@ class Public::UsersController < ApplicationController
   before_action :authenticate_user!
   before_action :ensure_correct_user, only: [:edit, :update]
   before_action :ensure_user_logged_in, only: [:withdraw]
+  before_action :ensure_guest_user, only: [:edit]
   def index
     @users = User.all
   end
@@ -71,6 +72,14 @@ class Public::UsersController < ApplicationController
   def ensure_user_logged_in
     unless user_signed_in?
       redirect_to new_user_session_path
+    end
+  end
+
+  def ensure_guest_user
+    @user = current_user
+    if @user.guest_user?
+      flash[:error] = 'ゲストユーザーはプロフィール編集画面へ遷移できません。'
+      redirect_to users_my_page_path
     end
   end
 end

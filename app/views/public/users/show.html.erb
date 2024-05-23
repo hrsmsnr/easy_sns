@@ -1,5 +1,5 @@
 <div class="text-center text-success"><%= flash[:success] %></div>
-
+<div class="text-center text-danger"><%= flash[:error] %></div>
 <% if @user == current_user %>
   <h1>マイページ</h1>
 <% else %>
@@ -41,8 +41,13 @@
 
   <div class="col-3">
     <div>
-      <h5 class="text-center">ユーザー編集ボタン</h5>
-      <div class="pb-1 text-center"><%= link_to "編集", edit_user_path(current_user.id),class:"btn btn-success" %></div>
+      <% if @user == current_user %>
+        <h5 class="text-center">ユーザー編集ボタン</h5>
+        <div class="pb-1 text-center"><%= link_to "編集", edit_user_path(current_user.id),class:"btn btn-success" %></div>
+      <% else %>
+        <h5 class="text-center">フォローボタン</h5>
+        <div class="pb-1 text-center"></div>
+      <% end %>
     </div>
     <div>
       <h5>合計いいね数</h5>

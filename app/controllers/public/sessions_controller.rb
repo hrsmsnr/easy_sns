@@ -32,7 +32,12 @@ class Public::SessionsController < Devise::SessionsController
   def after_sign_out_path_for(resource)
     root_path
   end
-
+  # ゲストログイン
+  def guest_sign_in
+    user = User.guest
+    sign_in user
+    redirect_to users_my_page_path, notice: "ゲストユーザーとしてログインしました。"
+  end
   private
   def configure_sign_in_params
     devise_parameter_sanitizer.permit(:sign_in) { |u| u.permit(:email, :encrypted_password) }
@@ -44,7 +49,7 @@ class Public::SessionsController < Devise::SessionsController
     # 【処理内容2】 アカウントを取得できなかった場合、このメソッドを終了する
     return if user.nil?
     # 【処理内容3】 取得したアカウントのパスワードと入力されたパスワードが一致していない場合、このメソッドを終了する
-    flash[:error] = 'パスワードが間違っています'
+    flash.now[:error] = 'パスワードが間違っています'
     return unless user.valid_password?(params[:user][:password])
     # 【処理内容4】 アクティブでない会員に対する処理
     flash[:success] = 'ログインに成功しました'
@@ -55,4 +60,5 @@ class Public::SessionsController < Devise::SessionsController
       redirect_to new_user_session_path
     end
   end
+
 end
