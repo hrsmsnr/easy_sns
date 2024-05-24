@@ -20,6 +20,7 @@ class Public::PostsController < ApplicationController
     @post_details = @post.post_details.order("sequence_number ASC")
     @comment = Comment.new
     @comments = @post.comments.order("created_at DESC")
+    @user = @post.user
   end
 
   def create

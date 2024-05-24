@@ -1,50 +1,50 @@
 <div class="text-center text-success"><%= flash[:success] %></div>
-<h1 class="text-primary">かんたんSNSへようこそ！</h1>
+<h1>かんたんSNSへようこそ！</h1>
 
-<div class="d-flex justify-content-center align-items-center h-100">
+<div class="d-flex flex-column justify-content-center align-items-center h-100">
 
-  <% if user_signed_in? %>
 
-    <div class="col text-center">
-      <%= link_to posts_path do %>
-        <!--<div class="col bg-primary text-white p-5 rounded">初めての方はこちらから</div>-->
-        <button class="btn btn-primary m-3" style="width: 300px; height: 200%;"><strong>投稿を見る</strong></button>
-      <% end %>
+    <div class="d-flex p-2 w-100 justify-content-center">
+      <div class="col-6">
+        <% if user_signed_in? %>
+          <%= link_to posts_path do %>
+            <button class="btn btn-primary m-3 p-5 w-100 h-100"><h3>投稿を見る</h3></button>
+          <% end %>
+        <% else %>
+          <%= link_to new_user_registration_path do %>
+            <button class="btn btn-primary m-3 p-5 w-100 h-100"><h3>初めての方はこちらから</h3></button>
+          <% end %>
+        <% end %>
+      </div>
+      <div class="col-6">
+        <% if user_signed_in? %>
+          <%= link_to users_path do %>
+            <button class="btn btn-success m-3 p-5 w-100 h-100"><h3>他のユーザーを見る</h3></button>
+          <% end %>
+        <% else %>
+          <%= link_to new_user_session_path do %>
+            <button class="btn btn-success m-3 p-5 w-100 h-100"><h3>登録済みの方はこちらから</h3></button>
+          <% end %>
+        <% end %>
+      </div>
     </div>
-    <div class="col">
-      <%= link_to users_path do %>
-        <!--<div class="col bg-success text-white p-5 rounded",style="height:500px;">登録済みの方はこちらから</div>-->
-        <button class="btn btn-success m-3 w-100 flex-grow-1">他のユーザーを見る</button>
-      <% end %>
+    <div class="d-flex p-2 w-100 justify-content-center">
+      <div class="col-6">
+        <% if user_signed_in? %>
+          <%= link_to users_my_page_path do %>
+            <button class="btn btn-secondary m-3 p-5 w-100 h-100"><h3>マイページ</h3></button>
+          <% end %>
+        <% else %>
+          <%= link_to users_guest_sign_in_path, method: :post do %>
+            <button class="btn btn-secondary m-3 p-5 w-100 h-100"><h3>お試しログイン</h3></button>
+          <% end %>
+        <% end %>
+      </div>
+      <div class="col-6">
+        <%= link_to about_path do %>
+          <button class="btn btn-warning m-3 p-5 w-100 h-100"><h3>かんたんSNSとは</h3></button>
+        <% end %>
+      </div>
     </div>
-    <div>
-      <%= link_to users_my_page_path do %>
-        <button class="btn btn-secondary m-3 w-100 flex-grow-1">マイページ</button>
-      <% end %>
-    </div>
-
-  <% else %>
-
-    <div class="col text-center">
-      <%= link_to new_user_registration_path do %>
-        <!--<div class="col bg-primary text-white p-5 rounded">初めての方はこちらから</div>-->
-        <button class="btn btn-primary m-3" style="width: 300px; height: 200%;"><strong>初めての方はこちらから</strong></button>
-      <% end %>
-    </div>
-    <div class="col">
-      <%= link_to new_user_session_path do %>
-        <!--<div class="col bg-success text-white p-5 rounded",style="height:500px;">登録済みの方はこちらから</div>-->
-        <button class="btn btn-success m-3 w-100 flex-grow-1">登録済みの方はこちらから</button>
-      <% end %>
-    </div>
-    <div>
-      <%= link_to about_path do %>
-        <button class="btn btn-secondary m-3 w-100 flex-grow-1">かんたんSNSとは</button>
-      <% end %>
-    </div>
-    <div class="row">
-      <%= link_to 'ゲストログイン', users_guest_sign_in_path, method: :post, class: 'btn btn-secondary' %>
-    </div>
-
-  <% end %>
+  </div>
 </div>
