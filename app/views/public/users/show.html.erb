@@ -3,14 +3,17 @@
 <% if @user == current_user %>
   <h1>マイページ</h1>
 <% else %>
-  <h1><%= @user.name %>のページ</h1>
+  <h1><%= @user.name %>さんのページ</h1>
 <% end %>
 
 <div class ="d-flex p-3 mt-4 m-0 border border-dark" style="min-height:250px; max-wigth:auto;">
+  <!--1/4項目-->
   <div class="col-3">
-    <%= image_tag @user.get_user_image, style:"height:220px; wigth:auto;" %>
+    <div style="height:220px; width:auto;">
+      <%= image_tag @user.get_user_image, class:"responsive-image" %>
+    </div>
   </div>
-
+  <!--2/4項目-->
   <div class="col-3">
     <div>
       <h5>ユーザーネーム</h5>
@@ -19,11 +22,11 @@
     <div>
       <h5>自己紹介</h5>
     </div>
-    <div class="rounded-lg p-1 pb-auto" style="min-height:110px; background-color:#eee;">
+    <div class="rounded-lg p-4 pb-auto" style="min-height:110px; background-color:#eee; word-wrap: break-word; width:100%;">
       <p><%= simple_format(@user.introduction) %></p>
     </div>
   </div>
-
+  <!--3/4項目-->
   <div class="col-3">
     <div>
       <h5>投稿数</h5>
@@ -38,15 +41,28 @@
       <h4 class="pb-1 text-center rounded-lg" style="background-color:#eee;"><%= @user.followeds.count %> 人</h4>
     </div>
   </div>
-
+  <!--4/4項目-->
   <div class="col-3">
     <div>
+      <!--ログインユーザーなら編集それ以外ならフォローボタン-->
       <% if @user == current_user %>
         <h5 class="text-center">ユーザー編集ボタン</h5>
         <div class="pb-1 text-center"><%= link_to "編集", edit_user_path(current_user.id),class:"btn btn-success" %></div>
       <% else %>
+        <!--フォロー機能-->
         <h5 class="text-center">フォローボタン</h5>
-        <div class="pb-1 text-center"></div>
+        <div class="pb-1 text-center">
+          <% if @user == current_user %>
+            <%= link_to edit_user_path(@user.id), class: "btn btn-outline-secondary btn-block" do %>
+              <i class="fas fa-user-cog"></i>
+            <% end %>
+            <% else if current_user.following?(@user) %>
+              <%= link_to "フォロー外す", user_relationships_path(@user.id), method: :delete, class: "btn btn-info", data: {confirm: "フォローを取り消しますか？"} %>
+            <% else %>
+              <%= link_to "フォローする", user_relationships_path(@user.id), method: :post, class: "btn btn-success" %>
+            <% end %>
+          <% end %>
+        </div>
       <% end %>
     </div>
     <div>
@@ -60,8 +76,8 @@
   </div>
 </div>
 
-<h2 class="py-2 text-center"><%= @user.name %>の投稿一覧</h2>
 <!--投稿一覧-->
+<h2 class="py-2 text-center"><%= @user.name %>の投稿一覧</h2>
 <div>
   <%= render "public/posts/list", posts: @posts %>
 </div>

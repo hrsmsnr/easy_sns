@@ -1,45 +1,97 @@
 <div class="text-center text-danger"><%= flash[:error] %></div>
-<div>ユーザー編集ページ</div>
+<h1>ユーザー編集ページ</h1>
+    <%= render "public/shared/error_messages", resource: @user %>
+
+
+<div class="row">
+  <h4 class="col-6">変更後</h4>
+  <h4 class="col-6">変更前</h4>
+</div>
 
 <%= form_with model: @user, id: 'user_form' , url: user_path do |f| %>
-  <%= render "public/shared/error_messages", resource: @user %>
-
-  <div class="image_field">
-    <div class="d-flex">
-      <div class="col-4">
-        変更前の画像<br />
-        <%= image_tag @user.get_user_image, class:"user-preview-image" %>
+  <div class="d-flex flex-column mt-1 m-0 border border-dark" style="min-height:350px; max-width:auto;">
+    <div class="d-flex h-100">
+      <div class="d-flex col-6 spacing-0 border-right border-dark h-100">
+        <!--1/4項目-->
+        <div class="col-6 d-flex p-3">
+          <div class="row spacing-0 h-100" style="height:220px; width:auto;">
+            <div id="previews"></div>
+          </div>
+        </div>
+        <!--2/4項目-->
+        <div class="col-6 p-3">
+          <div>
+            <h5>ユーザーネーム</h5>
+            <h4>
+              <%= f.text_field :name, autocomplete: "name", class:"pb-1 text-center rounded-lg w-100" %>
+            </h4>
+          </div>
+          <div>
+            <h5>自己紹介(空欄でもOK)</h5>
+          </div>
+          <div>
+            <p><%= f.text_area :introduction, autocomplete: "introduction", class:"rounded-lg p-4 pb-auto", style:"min-height:120px; word-wrap: break-word; width:100%;" %></p>
+          </div>
+        </div>
       </div>
-      <div class="col-3">
-        →
-      </div>
-      <div class="col-4">
-        変更後の画像<br />
-        <div id="previews"></div>
+      <div class="d-flex col-6 spacing-0 h-100">
+        <!--3/4項目-->
+        <div class="col-6 p-3">
+          <div style="height:220px; width:auto;">
+            <%= image_tag @user.get_user_image, class:"responsive-image" %>
+          </div>
+        </div>
+        <!--4/4項目-->
+        <div class="col-6 p-3">
+          <div>
+            <h5>ユーザーネーム</h5>
+            <h4 class="pb-1 text-center rounded-lg" style="background-color:#eee;">
+              <%= @user.name %>
+            </h4>
+          </div>
+          <div>
+            <h5>自己紹介</h5>
+          </div>
+          <div class="rounded-lg p-4 pb-auto" style="min-height:110px; background-color:#eee; word-wrap: break-word; width:100%;">
+            <p><%= simple_format(@user.introduction) %></p>
+          </div>
+        </div>
       </div>
     </div>
-    <%= f.label :user_image, "画像" %><br />
-    <%= f.file_field :user_image,  accept:'image/*' %>
+
+    <div class="d-flex border-top">
+      <div class="d-flex col-6 spacing-0 border-right border-dark p-1">
+        <div class="col-6 pl-0">
+          <h5 class="p-1"><%= f.label :user_image, "ユーザー画像" %></h5>
+          <div><%= f.file_field :user_image,  accept:'image/*' %></div>
+          <span class="file-name"></span>
+        </div>
+        <div class="col-6">
+          <h5><%= f.label :email, "メールアドレス" %></h5>
+          <div class="row spacing-0"><%= f.email_field :email, autocomplete: "email" %></div>
+        </div>
+      </div>
+      <div class="d-flex col-6 spacing-0 p-1">
+        <div class="col-6">
+          <h5></h5>
+          <div></div>
+        </div>
+        <div class="col-6">
+          <h5>メールアドレス</h5>
+          <div class="row p-2 m-0"><div class="px-2" style="background-color:#eee;"><%= @user.email %></div></div>
+        </div>
+      </div>
+
+    </div>
+
   </div>
 
-  <div class="field">
-     <%= f.label :name, "ユーザーネーム" %><br />
-     <%= f.text_field :name, autofocus: true, autocomplete: "name" %>
-  </div>
-
-  <div class="field">
-     <%= f.label :introduction, "自己紹介(空欄でもOK)" %><br />
-     <%= f.text_area :introduction, autocomplete: "introduction" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :email, "メールアドレス" %><br />
-    <%= f.email_field :email, autocomplete: "email" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "編集完了" %>
+  <div class="d-flex justify-content-between">
+    <div class="p-3">
+      <%= f.submit "編集完了" ,class:"btn btn-lg btn-success" %>
+    </div>
+    <div class="p-3">
+      <div><%= link_to "退会する", users_withdraw_path, method: :patch, class: "btn btn-lg btn-danger", data: {confirm: "本当に退会してもよろしいですか？"} %></div>
+    </div>
   </div>
 <% end %>
-</br>
-<div><%= link_to "退会する", users_withdraw_path, method: :patch, class: "btn btn-danger" %></div>

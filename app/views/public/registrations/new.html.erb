@@ -1,45 +1,71 @@
 <div class="text-center text-success"><%= flash[:success] %></div>
-<h2>新規ユーザー登録</h2>
-
-    <div id="previews"></div>
+<h2 class="pb-3">新規ユーザー登録</h2>
 <%= form_with model: @user, id: 'user_form', url: user_registration_path  do |f| %>
   <%= render "public/shared/error_messages", resource: resource %>
-  <div class="image_field">
-    <%= f.label :user_image, "画像" %>
-    <%= f.file_field :user_image,  accept:'image/*'%>
+  <div class="d-flex flex-column mt-1 m-0 border border-dark  w-100" style="min-height:230px;">
+
+    <div class="d-flex w-100 h-100">
+      <!--1/4項目-->
+      <div class="col-6 d-flex p-3">
+        <div class="border border-dark h-100" style="height:300px; width:100%;">
+          <div id="previews"></div>
+        </div>
+      </div>
+      <!--2/4項目-->
+      <div class="col-6 p-3">
+        <div>
+          <h5>ユーザーネーム(後から変更可能)</h5>
+          <h4>
+            <%= f.text_field :name, autocomplete: "name", class:"pb-1 text-center rounded-lg w-100" %>
+          </h4>
+        </div>
+        <div>
+          <h5>自己紹介(空欄でもOK,後から変更可能)</h5>
+        </div>
+        <div>
+          <p><%= f.text_area :introduction, autocomplete: "introduction", class:"rounded-lg p-4 pb-auto", style:"min-height:120px; word-wrap: break-word; width:100%;" %></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="d-flex border-top">
+      <div class="d-flex p-1">
+        <div>
+          <h5 class="p-1"><%= f.label :user_image, "ユーザー画像" %></h5>
+          <div><%= f.file_field :user_image,  accept:'image/*' %></div>
+          <span class="file-name"></span>
+        </div>
+        <div class="row p-2 m-0">
+          <h5><%= f.label :email, "メールアドレス" %></h5>
+          <div><%= f.email_field :email, autocomplete: "email" %></div>
+        </div>
+        <div class="row p-2 m-0">
+          <h5><%= f.label :password,"パスワード" %></h5>
+          <% if @minimum_password_length %>
+            <em>(英数字<%= @minimum_password_length %> 字以上)</em>
+          <% end %><br />
+          <div><%= f.password_field :password, autocomplete: "new-password" %></div>
+        </div>
+        <div class="row p-2 m-0">
+          <h5><%= f.label :password_confirmation,"パスワード(再確認)" %></h5>
+          <div><%= f.password_field :password_confirmation, autocomplete: "new-password" %></div>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <div class="field">
-     <%= f.label :name,"ユーザーネーム(後から変更可能)" %><br />
-     <%= f.text_field :name, autofocus: true, autocomplete: "name" %>
-  </div>
-
-  <div class="field">
-     <%= f.label :introduction,"自己紹介(空欄でもOK,後から変更可能)" %><br />
-     <%= f.text_area :introduction, autocomplete: "introduction" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :email,"メールアドレス" %><br />
-    <%= f.email_field :email, autocomplete: "email" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password,"パスワード" %>
-    <% if @minimum_password_length %>
-    <em>(英数字<%= @minimum_password_length %> 字以上)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation,"パスワード(再確認)" %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "登録してログイン" %>
+  <div class="d-flex justify-content-start">
+    <div class="p-3">
+      <%= f.submit "登録してログイン" ,class:"btn btn-lg btn-success" %>
+    </div>
   </div>
 <% end %>
 
-<%= render "public/shared/links" %>
+
+
+<div class="col-lg-9 offset-lg-3 py-2">
+    <h5 class="px-3" style="background-color:#eee; width:fit-content;">登録済みの方</h5>
+　</div>
+<div class="col-lg-6 offset-lg-4 pl-3">
+    <%= link_to "こちら", new_user_session_path(resource_name) %>　からログインしてください。
+</div>

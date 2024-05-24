@@ -31,9 +31,9 @@ function setupImagePreview() {
 
       // ファイルフィールドの名前に基づいて異なるクラスを追加
       if (fileField.name.includes('user_image')) {
-        previewImage.classList.add('user-preview-image');
+        previewImage.classList.add('responsive-image');
       } else if (fileField.name.includes('post_image')) {
-        previewImage.classList.add('post-preview-image');
+        previewImage.classList.add('responsive-image');
       }
 
       // setAttributeメソッドを用いて生成したimg要素のsrc属性へ変数blobを設定する

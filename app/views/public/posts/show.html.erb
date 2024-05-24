@@ -2,15 +2,28 @@
 <div class="text-center text-danger"><%= flash[:error] %></div>
 <h1>投稿詳細</h1>
 
-<div class="row p-0 m-0">
-  <div class="col-5 item-left m-2">
+<div class="row col-md-8 spacing-0 d-flex justify-content-between">
+  <div class="m-2">
     <%= link_to user_path(@post.user_id) do %>
       <%= image_tag @post.user.get_user_image, size: '50x50' %>
       <span class="ml-2"><%= @post.user.name %></span>
     <% end %>
   </div>
+  <div>
+    <% unless @user == current_user %>
+      <% if current_user.following?(@user) %>
+        <div>
+          <%= link_to "フォロー外す", user_relationships_path(@user.id), method: :delete %>
+        </div>
+      <% else %>
+        <div>
+          <%= link_to "フォローする", user_relationships_path(@user.id), method: :post %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
   <% if @post.user_id == current_user.id %>
-    <div class="col-6 text-right m-2">
+    <div class="m-2">
       <%= link_to "投稿を編集する", edit_post_path(@post), class:"btn btn-success" %>
       <%= link_to "投稿を削除する", post_path(@post), class:"btn btn-danger", method: :delete %>
     </div>
@@ -20,11 +33,20 @@
 <div class="d-flex">
   <!--投稿ステータスによって表示の変更・投稿者には表示-->
   <% if @post.is_public? || @post.user == current_user %>
-    <div class="card col-md-8 border-dark p-0 m-0" style="min-height:300px">
+    <div class="card col-md-8 border-dark spacing-0" style="min-height:300px">
 
       <div class="p-2 m-0 row card-header border-dark">
-        <div class="col" style:"object-fit: contain;">
+        <div class="col d-flex align-items-center justify-content-between" style:"object-fit: contain;">
           <h4><%= @post.title %></h4>
+          <% if @post.favorited_by?(current_user) %>
+            <%= link_to post_favorite_path(@post), method: :delete do %>
+              <h5>いいね済み(<%= @post.favorites.count %>)</h5>
+            <% end %>
+          <% else %>
+            <%= link_to post_favorite_path(@post), method: :post do %>
+              <h5>いいね(<%= @post.favorites.count %>)</h5>
+            <% end %>
+          <% end %>
         </div>
         <% if @post.user == current_user %>
           <% if @post.is_public? %>
@@ -39,8 +61,8 @@
         <% end %>
       </div>
 
-      <div class="row p-0 m-0">
-        <div class="col-lg h-100">
+      <div class=" flex-column spacing-0 h-100">
+        <!--<div class="col-lg">-->
           <div class="py-2 px-4 m-0 row justify-content-start">
             カテゴリ：<%= @post.category %>
           </div>
@@ -68,17 +90,17 @@
             <% end %>
           <% end %>
 
+        <!--</div>-->
+
+      </div>
           <div class="mt-auto text-right mx-3">
             <p>投稿日：<%= @post.created_at.strftime('%Y年%m月%d日') %></p>
           </div>
-        </div>
-
-      </div>
     </div>
 
 
 
-    <div class="card col-md-4 border-dark p-0 m-0" style="min-height:300px">
+    <div class="card col-md-4 border-dark spacing-0" style="min-height:300px">
       <!--コメント欄-->
       <div class="p-2 px-3 m-0 row card-header border-dark">
         <h4>コメント欄</h4>

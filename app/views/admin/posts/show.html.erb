@@ -1,6 +1,6 @@
 <h1>投稿詳細</h1>
 
-<div class="row p-0 m-0">
+<div class="row spacing-0">
   <div class="col-5 item-left m-2">
     <%= link_to admin_user_path(@post.user_id) do %>
       <%= image_tag @post.user.get_user_image, size: '50x50' %>
@@ -29,7 +29,7 @@
 </div>
 
 <div class="d-flex">
-  <div class="card col-md-8 border-dark p-0 m-0" style="min-height:300px">
+  <div class="card col-md-8 border-dark spacing-0" style="min-height:300px">
 
     <div class="p-2 px-3 m-0 row card-header border-dark">
       <div class="col" style:"object-fit: contain;">
@@ -47,7 +47,7 @@
         <% end %>
     </div>
 
-    <div class="row p-0 m-0">
+    <div class="row spacing-0">
       <div class="col-lg h-100">
         <div class="py-2 px-4 m-0 row justify-content-start">
           カテゴリ：<%= @post.category %>
@@ -83,7 +83,7 @@
   </div>
 
 
-  <div class="card col-md-4 border-dark p-0 m-0" style="min-height:300px">
+  <div class="card col-md-4 border-dark spacing-0" style="min-height:300px">
     <!--コメント欄-->
     <div class="p-2 px-3 m-0 row card-header border-dark">
       <h4>コメント欄</h4>
