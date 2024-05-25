@@ -22,6 +22,8 @@ Rails.application.routes.draw do
     root to: 'homes#top'
     get 'about' => 'homes#about'
     get 'users/my_page' => 'users#show'
+    # 検索機能
+    get "search" => "searches#search"
 
     patch 'users/withdraw' => 'users#withdraw'
 
@@ -42,7 +44,5 @@ Rails.application.routes.draw do
   devise_scope :user do
     post "users/guest_sign_in", to: "public/sessions#guest_sign_in"
   end
-  # 検索機能
-  get "search" => "searches#search"
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

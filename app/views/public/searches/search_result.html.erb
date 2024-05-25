@@ -1,40 +1,10 @@
 <h1>検索結果</h1>
 
 
-  <!--検索対象モデルがUserの時 -->
-  <% if @range == "User" %>
-    <%= render "public/users/list", users: @users %>
-  <% else %>
-    <!--検索対象モデルがUserではない時(= 検索対象モデルがPostの時) -->
-    <div class="tabs">
-      <ul class="nav nav-tabs text-center">
-        <li class="nav-item col">
-          <a class="nav-link active" data-toggle="tab" href="#usual">日常</a>
-        </li>
-        <li class="nav-item col">
-          <a class="nav-link" data-toggle="tab" href="#lifehack">生活の知恵</a>
-        </li>
-        <li class="nav-item col">
-          <a class="nav-link" data-toggle="tab" href="#play">遊び</a>
-        </li>
-        <li class="nav-item col">
-          <a class="nav-link" data-toggle="tab" href="#dish">料理</a>
-        </li>
-      </ul>
-    
-      <div class="tab-content">
-        <div id="usual" class="tab-pane fade show active">
-          <%= render "public/posts/list", posts: @usual_posts %>
-        </div>
-        <div id="lifehack" class="tab-pane fade">
-          <%= render "public/posts/list", posts: @lifehack_posts %>
-        </div>
-        <div id="play" class="tab-pane fade">
-          <%= render "public/posts/list", posts: @play_posts %>
-        </div>
-        <div id="dish" class="tab-pane fade">
-          <%= render "public/posts/list", posts: @dish_posts %>
-        </div>
-      </div>
-    </div>
-  <% end %>
+<!--検索対象モデルがUserの時 -->
+<% if @range == "User" %>
+  <%= render "public/users/list", users: @users %>
+<% else %>
+<!--検索対象モデルがUserではない時(= 検索対象モデルがPostの時) -->
+  <%= render "public/posts/list", posts: @posts %>
+<% end %>

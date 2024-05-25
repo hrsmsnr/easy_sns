@@ -22,7 +22,7 @@
     <div>
       <h5>自己紹介</h5>
     </div>
-    <div class="rounded-lg p-4 pb-auto" style="min-height:110px; background-color:#eee; word-wrap: break-word; width:100%;">
+    <div class="rounded-lg p-1 pb-auto" style="min-height:105px; background-color:#eee; word-wrap: break-word; width:100%;">
       <p><%= simple_format(@user.introduction) %></p>
     </div>
   </div>
@@ -34,11 +34,11 @@
     </div>
     <div>
       <h5>フォロー</h5>
-      <h4 class="pb-1 text-center rounded-lg" style="background-color:#eee;"><%= @user.followers.count %> 人</h4>
+      <%= link_to user_follows_path(@user) do %><h4 class="pb-1 text-center rounded-lg" style="background-color:#eee;"><%= @user.followers.count %> 人</h4><% end %>
     </div>
     <div>
       <h5>フォロワー</h5>
-      <h4 class="pb-1 text-center rounded-lg" style="background-color:#eee;"><%= @user.followeds.count %> 人</h4>
+      <%= link_to user_followers_path(@user) do %><h4 class="pb-1 text-center rounded-lg" style="background-color:#eee;"><%= @user.followeds.count %> 人</h4><% end %>
     </div>
   </div>
   <!--4/4項目-->

@@ -32,6 +32,16 @@ class Public::UsersController < ApplicationController
       @comments_count += post.comments.count
     end
   end
+  
+  def follows
+    user = User.find(params[:user_id])
+    @users = user.following_users
+  end
+
+  def followers
+    user = User.find(params[:user_id])
+    @users = user.follower_users
+  end
 
   def edit
     @user = User.find(params[:id])

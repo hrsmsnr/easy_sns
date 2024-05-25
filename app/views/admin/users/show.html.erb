@@ -1,6 +1,7 @@
 <h1>[管理]<%= @user.name %>のページ</h1>
 
 <div class ="d-flex p-3 mt-4 m-0 border border-dark" style="min-height:250px; max-wigth:auto;">
+
   <div class="col-3">
     <%= image_tag @user.get_user_image, style:"max-height:220px; wigth:auto;" %>
   </div>
@@ -13,7 +14,7 @@
     <div>
       <h5>自己紹介</h5>
     </div>
-    <div class="rounded-lg p-1 pb-auto" style="min-height:110px; background-color:#eee;">
+    <div class="rounded-lg p-1 px-2" style="min-height:105px; background-color:#eee; word-wrap: break-word; width:100%;">
       <p><%= simple_format(@user.introduction) %></p>
     </div>
   </div>
@@ -63,11 +64,12 @@
       <div><%= link_to "削除", admin_user_path(@user), method: :delete, class:"btn bg-danger text-light" %></div>
     </div>
   </div>
+
 </div>
 
 <h2 class="py-2 text-center"><%= @user.name %>の投稿一覧</h2>
 <!--投稿一覧-->
 <div>
-  <%= render "admin/posts/list", posts: @posts %>
+  <%= render "public/posts/list", posts: @posts %>
 </div>
 
