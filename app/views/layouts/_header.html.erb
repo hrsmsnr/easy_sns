@@ -12,10 +12,10 @@
     </div>
 
     <div class="items-right">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
-                  aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+                    aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav ml-auto">
           <!--adminヘッダー-->
@@ -36,10 +36,13 @@
             <li class="nav-item"><%= link_to 'About', about_path, class: "btn btn-outline-secondary mr-3" %></li>
             <li class="nav-item"><%= link_to '新規登録', new_user_registration_path, class: "btn btn-outline-secondary mr-3" %></li>
             <li class="nav-item"><%= link_to 'ログイン', new_user_session_path, class: "btn btn-outline-secondary mr-3" %></li>
-
           <% end %>
+
         </ul>
       </div>
+      <% if user_signed_in? %>
+        <div class="p-2"><%= render 'public/searches/search' %></div>
+      <% end %>
     </div>
   </nav>
 
