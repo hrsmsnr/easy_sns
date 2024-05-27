@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  # get "search" => "searches#search", as: "search"
+  # 検索機能
+  get "search" => "searches#search", as: "search"
 
   # 管理者側
   devise_for :admin, skip: [:registrations, :passwords] , controllers: {
@@ -22,8 +23,6 @@ Rails.application.routes.draw do
     root to: 'homes#top'
     get 'about' => 'homes#about'
     get 'users/my_page' => 'users#show'
-    # 検索機能
-    get "search" => "searches#search"
 
     patch 'users/withdraw' => 'users#withdraw'
 
