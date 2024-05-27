@@ -6,10 +6,10 @@ class SearchesController < ApplicationController
     @word = params[:word]
 
     if @range == "User"
-      @users = User.looks(params[:search], params[:word])
+      @users = User.looks(params[:search], params[:word]).page(params[:page]).per(3)
       render "searches/search_result"
     elsif @range =="Post"
-      @posts = Post.looks(params[:search], params[:word])
+      @posts = Post.looks(params[:search], params[:word]).page(params[:page]).per(3)
       render "searches/search_result"
     else
       redirect_to request.referer

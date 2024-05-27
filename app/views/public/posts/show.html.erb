@@ -30,96 +30,99 @@
   <% end %>
 </div>
 
-<div class="d-flex">
+<div>
   <!--投稿ステータスによって表示の変更・投稿者には表示-->
   <% if @post.is_public? || @post.user == current_user %>
-    <div class="card col-md-8 border-dark spacing-0" style="min-height:300px">
-
-      <div class="p-2 m-0 row card-header border-dark">
-        <div class="col d-flex align-items-center justify-content-between" style:"object-fit: contain;">
-          <h4><%= @post.title %></h4>
-          <% if @post.favorited_by?(current_user) %>
-            <%= link_to post_favorite_path(@post), method: :delete do %>
-              <h5>いいね済み(<%= @post.favorites.count %>)</h5>
+    <div class="row">
+      <div class="card col-lg-8 col-md-12 border-dark spacing-0" style="min-height:300px">
+        <div class="p-2 m-0 row card-header border-dark">
+          <div class="col d-flex align-items-center justify-content-between" style="object-fit: contain;">
+            <h4><%= @post.title %></h4>
+            <% if @post.favorited_by?(current_user) %>
+              <%= link_to post_favorite_path(@post), method: :delete do %>
+                <h5>いいね済み(<%= @post.favorites.count %>)</h5>
+              <% end %>
+            <% else %>
+              <%= link_to post_favorite_path(@post), method: :post do %>
+                <h5>いいね(<%= @post.favorites.count %>)</h5>
+              <% end %>
             <% end %>
-          <% else %>
-            <%= link_to post_favorite_path(@post), method: :post do %>
-              <h5>いいね(<%= @post.favorites.count %>)</h5>
+          </div>
+          <% if @post.user == current_user %>
+            <% if @post.is_public? %>
+              <div class="text-right align-content-center m-2">
+                <span class="p-2 rounded-lg bg-success text-light">公開中</span>
+              </div>
+            <% else %>
+              <div class="text-right align-content-center m-2">
+                <span class="p-2 rounded-lg bg-danger text-light">非公開</span>
+              </div>
             <% end %>
           <% end %>
         </div>
-        <% if @post.user == current_user %>
-          <% if @post.is_public? %>
-            <div class="text-right align-content-center m-2">
-              <span class="p-2 rounded-lg bg-success text-light">公開中</span>
-            </div>
-          <% else %>
-            <div class="text-right align-content-center m-2">
-              <span class="p-2 rounded-lg bg-danger text-light">非公開</span>
-            </div>
-          <% end %>
-        <% end %>
-      </div>
 
-      <div class=" flex-column spacing-0 h-100">
-        <!--<div class="col-lg">-->
-          <div class="py-2 px-4 m-0 row justify-content-start">
-            カテゴリ：<%= @post.category %>
+        <div class="flex-column spacing-0 h-100">
+          <!--カテゴリ-->
+          <div class="row spacing-0 justify-content-end">
+            <div class="px-3 py-1 bg-primary">
+              カテゴリ：<%= @post.category %>
+            </div>
           </div>
 
+          <!--画像-->
           <% if @post.post_image.attached? %>
             <div class="border-bottom">
               <%= image_tag @post.post_image, style:"max-height:250px; width:100%; object-fit: contain;" %>
             </div>
           <% else %>
-            <!--非表示-->
+            <!--画像なし-->
           <% end %>
-          <!--内容-->
-            <div class="p-2 pt-3 m-0">
-              <h5><%= simple_format(@post.body) %></h5>
-            </div>
 
+          <!--内容-->
+          <div class="px-2 pt-1 mx-1">
+            <h5><%= simple_format(@post.body) %></h5>
+          </div>
 
           <!--詳細-->
           <% unless @post_category == "日常" %>
             <% @post_details.each do |post_detail| %>
               <div class="p-2 m-0">
                 <strong><%= post_detail.sequence_number %>.</strong>
-                <div class="pl-4 border"><%= simple_format(post_detail.body) %></div>
+                <div class="p-2 pb-0 border" style="width:80%"><%= simple_format(post_detail.body) %></div>
               </div>
             <% end %>
           <% end %>
-
-        <!--</div>-->
-
-      </div>
-          <div class="mt-auto text-right mx-3">
-            <p>投稿日：<%= @post.created_at.strftime('%Y年%m月%d日') %></p>
-          </div>
-    </div>
-
-
-
-    <div class="card col-md-4 border-dark spacing-0" style="min-height:300px">
-      <!--コメント欄-->
-      <div class="p-2 px-3 m-0 row card-header border-dark">
-        <h4>コメント欄</h4>
-      </div>
-      <div class="p-2 border-bottom">
-        <h5>新しいコメントの投稿</h5>
-        <div class="form-model">
-          <%= form_with model: [@post, @comment], local: false do |f| %>
-            <%= f.text_area :body,class: "comment-text w-100",style:"min-height:80px" %>
-            <div>
-              <%= f.submit "送信" %>
-            </div>
-          <% end %>
+        </div>
+        <!--投稿日-->
+        <div class="mb-0 mt-auto text-right mx-3">
+          <p>投稿日：<%= @post.created_at.strftime('%Y年%m月%d日') %></p>
         </div>
       </div>
-      <div class="px-2">
-        <h5>コメント</h5>
-        <div class="comment-list w-100">
-          <%= render "public/comments/comment_list", post: @post %>
+
+      <!--コメント欄-->
+      <div class="card col-lg-4 col-md-12 border-dark spacing-0" style="min-height:300px">
+        <!--コメント欄ヘッダー-->
+        <div class="p-2 px-3 m-0 row card-header border-dark">
+          <h4>コメント欄</h4>
+        </div>
+        <!--新しいコメント-->
+        <div class="p-2 border-bottom">
+          <h5>新しいコメントの投稿</h5>
+          <div class="form-model">
+            <%= form_with model: [@post, @comment], local: false do |f| %>
+              <%= f.text_area :body,class: "comment-text w-100",style:"min-height:80px" %>
+              <div>
+                <%= f.submit "送信" %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+        <!--コメント一覧-->
+        <div class="px-2">
+          <h5>コメント</h5>
+          <div class="comment-list w-100">
+            <%= render "public/comments/comment_list", post: @post %>
+          </div>
         </div>
       </div>
     </div>

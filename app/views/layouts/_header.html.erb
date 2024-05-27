@@ -1,16 +1,18 @@
 <header class="vw-100 border-bottom border-dark" style="min-height:100px">
 
   <nav class="navbar navbar-expand-xl navbar-light justify-content-between">
-    <div>
-      <a class="navbar-brand" href="/"><%= image_tag('header-logo.jpg', style: "max-height: 80px; width: auto;") %></a>
-      <div class="mt-2">
-        <% if admin_signed_in? %>
-          管理者がログイン中
-        <% elsif current_user %>
-          <%= current_user.name %> さんがログイン中
-        <% end %>
-      </div>
+    <a class="navbar-brand" href="/"><%= image_tag('header-logo.jpg', style: "max-height: 80px; width: auto;") %></a>
+    
+    
+    <div class="mt-2">
+      <% if admin_signed_in? %>
+        管理者がログイン中
+      <% elsif current_user %>
+        <%= current_user.name %> さんがログイン中
+      <% end %>
     </div>
+    
+
     <div class="items-right">
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
                     aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">

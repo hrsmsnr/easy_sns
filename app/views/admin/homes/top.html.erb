@@ -1,6 +1,128 @@
 <h1>データ一覧</h1>
-<div>当日の投稿数</div>
-<div>当月の投稿数</div>
-<div>投稿したユーザー数</div>
-<div>新規登録ユーザー数</div>
-<div>ユーザーログイン数</div>
+
+<!--ユーザーのデータ-->
+<h2>ユーザー</h2>
+<table class="table table-bordered">
+  <thead class="table-active">
+    <th style="width:30%;">総数</th>
+    <th style="width:30%;">今日の登録数</th>
+    <th style="width:30%;">今週の登録数</th>
+  </thead>
+  <tbody>
+    <tr>
+      <td><%= User.count %> 人</td>
+      <td><%= @users_today_count %> 人</td>
+      <td>
+        <%= @users_this_week_count - @users_last_week_count %> 人
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<!--全投稿のデータ-->
+<h2>全投稿</h2>
+<table class="table table-bordered">
+  <thead class="table-active">
+    <th style="width:30%;">総投稿数</th>
+    <th style="width:30%;">今日の投稿数</th>
+    <th style="width:30%;">今週の投稿数</th>
+  </thead>
+  <tbody>
+    <tr>
+      <td><%= Post.count %></td>
+      <td><%= @posts_today_count %></td>
+      <td>
+        <%= @posts_this_week_count - @posts_last_week_count %>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<!--日常投稿のデータ-->
+<h2>各投稿</h2>
+<table class="table table-bordered">
+  <thead class="table-active">
+    <th style="width:25%;">日常</th>
+    <th style="width:25%;">生活の知恵</th>
+    <th style="width:25%;">遊び</th>
+    <th style="width:25%;">料理</th>
+  </thead>
+  <tbody>
+    <tr>
+      <td><%= @usual_posts.count %></td>
+      <td><%= @lifehack_posts.count %></td>
+      <td><%= @play_posts.count %></td>
+      <td><%= @dish_posts.count %></td>
+    </tr>
+  </tbody>
+</table>
+
+<!--1週間のデータ＆グラフ-->
+
+<h2>7日間分の投稿数</h2>
+<table class="table table-bordered">
+  <thead class="table-active">
+    <th>6日前</th>
+    <th>5日前</th>
+    <th>4日前</th>
+    <th>3日前</th>
+    <th>2日前</th>
+    <th>1日前</th>
+    <th>今日</th>
+  </thead>
+  <tbody>
+    <tr>
+      <% i = 6 %>
+      <% while i >= 0 do %>
+        <td><%= @posts.where("DATE(created_at) = ?", Date.today - i.day ).count %></td>
+        <% i = i - 1 %>
+      <% end %>
+    </tr>
+  </tbody>
+</table>
+
+<canvas id="chart"></canvas>
+<script>
+  $(document).on('turbolinks:load', function() {
+    var ctx = document.getElementById("chart");
+    var chart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: ['6日前', '5日前', '4日前', '3日前', '2日前', '1日前', '今日'],
+        datasets: [
+          {
+            label: '投稿した本の数',
+            data: [
+              <% i = 6 %>
+              <% while i >= 0 do %>
+                <%= @posts.where("DATE(created_at) = ?", Date.today - i.day ).count %>,
+                <% i = i - 1 %>
+              <% end %>
+            ],
+            borderColor: "rgba(0,0,255,1)",
+            backgroundColor: "rgba(0,0,0,0)",
+            tension: 0.4
+          }
+        ],
+      },
+      options: {
+        plugins: {
+          title: {
+            display: true,
+            text: '7日間の投稿数の比較'
+          }
+        },
+        responsive: true,
+        scales: {
+          y:{
+            suggestedMin: 0,
+            suggestedMax: 10
+          },
+          x:{
+            stacked: true
+          },
+        },
+      }
+    });
+  });
+</script>
