@@ -9,17 +9,17 @@ class Public::PostsController < ApplicationController
   end
 
   def index
-    @usual_posts = Post.where(category:0).order("created_at DESC")
-    @lifehack_posts = Post.where(category:1).order("created_at DESC")
-    @play_posts = Post.where(category:2).order("created_at DESC")
-    @dish_posts = Post.where(category:3).order("created_at DESC")
+    @usual_posts = Post.where(category:0).order("created_at DESC").page(params[:page]).per(3)
+    @lifehack_posts = Post.where(category:1).order("created_at DESC").page(params[:page]).per(3)
+    @play_posts = Post.where(category:2).order("created_at DESC").page(params[:page]).per(3)
+    @dish_posts = Post.where(category:3).order("created_at DESC").page(params[:page]).per(3)
   end
 
   def show
     @post = Post.find(params[:id])
-    @post_details = @post.post_details.order("sequence_number ASC")
+    @post_details = @post.post_details.order("sequence_number ASC").page(params[:page]).per(3)
     @comment = Comment.new
-    @comments = @post.comments.order("created_at DESC")
+    @comments = @post.comments.order("created_at DESC").page(params[:page]).per(3)
     @user = @post.user
   end
 

@@ -1,4 +1,6 @@
-<div class="d-flex flex-column col-8 offset-2 py-3 ">
+
+<div class="d-flex flex-column col-8 offset-2 py-3 scroll jscroll">
+  <div>
   <% users.each do |user| %>
     <div class="d-flex border border-dark p-2 m-2">
       <div class="col-8">
@@ -57,4 +59,7 @@
       </div>
     </div>
   <% end %>
+  </div>
+  <div style="visibility: hidden;"><%= paginate users %></div>
 </div>
+

@@ -14,12 +14,10 @@ import "bootstrap";
 import "./preview.js";
 import "./post_detail.js";
 import "cocoon";
+import "./jquery.jscroll.js";
 import "../stylesheets/application";
 import "../stylesheets/custom.scss";
 
-//= require jquery
-//= require jquery_ujs
-//= require cocoon
 
 Rails.start();
 Turbolinks.start();

@@ -4,7 +4,7 @@ class Public::UsersController < ApplicationController
   before_action :ensure_user_logged_in, only: [:withdraw]
   before_action :ensure_guest_user, only: [:edit]
   def index
-    @users = User.all
+    @users = User.all.page(params[:page]).per(3)
   end
 
   def show
@@ -20,7 +20,7 @@ class Public::UsersController < ApplicationController
       end
       #----------------------
     end
-    @posts = @user.posts.order("created_at DESC")
+    @posts = @user.posts.order("created_at DESC").page(params[:page]).per(3)
     # 全いいね数カウント
     @favorites_count = 0
     @posts.each do |post|
@@ -32,7 +32,7 @@ class Public::UsersController < ApplicationController
       @comments_count += post.comments.count
     end
   end
-  
+
   def follows
     user = User.find(params[:user_id])
     @users = user.following_users
