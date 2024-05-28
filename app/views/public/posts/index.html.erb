@@ -1,33 +1,33 @@
 <div class="text-center text-success"><%= flash[:success] %></div>
-<div>投稿一覧ページ</div>
+<h1>投稿一覧</h1>
 <!-- タブとコンテンツの基本構造 -->
 <div class="tabs">
   <ul class="nav nav-tabs text-center">
     <li class="nav-item col">
-      <a class="nav-link active" data-toggle="tab" href="#usual">日常</a>
+      <a class="nav-link active" data-toggle="tab" href="#usual" style="background-color:#ffffcc;">日常</a>
     </li>
     <li class="nav-item col">
-      <a class="nav-link" data-toggle="tab" href="#lifehack">生活の知恵</a>
+      <a class="nav-link" data-toggle="tab" href="#lifehack" style="background-color:#ccffcc">生活の知恵</a>
     </li>
     <li class="nav-item col">
-      <a class="nav-link" data-toggle="tab" href="#play">遊び</a>
+      <a class="nav-link" data-toggle="tab" href="#play" style="background-color:#ccffff;">遊び</a>
     </li>
     <li class="nav-item col">
-      <a class="nav-link" data-toggle="tab" href="#dish">料理</a>
+      <a class="nav-link" data-toggle="tab" href="#dish" style="background-color:#ffcccc;">料理</a>
     </li>
   </ul>
 
   <div class="tab-content">
-    <div id="usual" class="tab-pane fade show active">
+    <div id="usual" class="tab-pane fade show active py-3" style="background-color:#ffffcc;">
       <%= render "public/posts/list", posts: @usual_posts %>
     </div>
-    <div id="lifehack" class="tab-pane fade">
+    <div id="lifehack" class="tab-pane fade py-3" style="background-color:#ccffcc;">
       <%= render "public/posts/list", posts: @lifehack_posts %>
     </div>
-    <div id="play" class="tab-pane fade">
+    <div id="play" class="tab-pane fade py-3" style="background-color:#ccffff;">
       <%= render "public/posts/list", posts: @play_posts %>
     </div>
-    <div id="dish" class="tab-pane fade">
+    <div id="dish" class="tab-pane fade py-3" style="background-color:#ffcccc;">
       <%= render "public/posts/list", posts: @dish_posts %>
     </div>
   </div>

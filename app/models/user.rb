@@ -7,6 +7,7 @@ class User < ApplicationRecord
   has_many :posts, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
+  has_many :favorite_posts, through: :favorites, source: :post
 
   has_many :followers, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
   has_many :following_users, through: :followers, source: :followed
@@ -50,11 +51,11 @@ class User < ApplicationRecord
       user.name = "ゲストユーザー"
     end
   end
-  
+
   def guest_user?
     email == GUEST_USER_EMAIL
   end
-  
+
   # 検索方法分岐
   def self.looks(search, word)
     if search == "perfect_match"

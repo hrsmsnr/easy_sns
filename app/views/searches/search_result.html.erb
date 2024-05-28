@@ -1,7 +1,7 @@
 <h1>検索結果</h1>
 
 <!--検索対象モデルがUserの時 -->
-<% if @range == "User" %>
+<% if @range == "ユーザー" %>
   <%= render "public/users/list", users: @users %>
 <% else %>
 <!--検索対象モデルがUserではない時(= 検索対象モデルがPostの時) -->

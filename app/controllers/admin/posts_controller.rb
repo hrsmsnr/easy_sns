@@ -2,16 +2,16 @@ class Admin::PostsController < ApplicationController
   before_action :authenticate_admin!
 
   def index
-    @usual_posts = Post.where(category:0).order("created_at DESC")
-    @lifehack_posts = Post.where(category:1).order("created_at DESC")
-    @play_posts = Post.where(category:2).order("created_at DESC")
-    @dish_posts = Post.where(category:3).order("created_at DESC")
+    @usual_posts = Post.where(category:0).order("created_at DESC").page(params[:page]).per(5)
+    @lifehack_posts = Post.where(category:1).order("created_at DESC").page(params[:page]).per(5)
+    @play_posts = Post.where(category:2).order("created_at DESC").page(params[:page]).per(5)
+    @dish_posts = Post.where(category:3).order("created_at DESC").page(params[:page]).per(5)
   end
 
   def show
     @post = Post.find(params[:id])
     @post_details = @post.post_details
-    @comments = @post.comments.order("created_at DESC")
+    @comments = @post.comments.order("created_at DESC").page(params[:page]).per(6)
   end
 
   def update

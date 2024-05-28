@@ -34,11 +34,20 @@
     </div>
     <div>
       <h5>フォロー</h5>
-      <%= link_to user_follows_path(@user) do %><h4 class="pb-1 text-center rounded-lg" style="background-color:#eee;"><%= @user.followers.count %> 人</h4><% end %>
+      <% unless @user.followers.count == 0 %>
+        <%= link_to user_follows_path(@user) do %><h4 class="pb-1 text-center rounded-lg" style="background-color:#eee;"><%= @user.followers.count %> 人</h4><% end %>
+      <% else %>
+        <h4 class="pb-1 text-center rounded-lg" style="background-color:#eee;"><%= @user.followers.count %> 人</h4>
+      <% end %>
     </div>
     <div>
       <h5>フォロワー</h5>
-      <%= link_to user_followers_path(@user) do %><h4 class="pb-1 text-center rounded-lg" style="background-color:#eee;"><%= @user.followeds.count %> 人</h4><% end %>
+      <% unless @user.followeds.count == 0 %>
+        <%= link_to user_followers_path(@user) do %><h4 class="pb-1 text-center rounded-lg" style="background-color:#eee;"><%= @user.followeds.count %> 人</h4><% end %>
+      <% else %>
+        <h4 class="pb-1 text-center rounded-lg" style="background-color:#eee;"><%= @user.followeds.count %> 人</h4>
+      <% end %>
+
     </div>
   </div>
   <!--4/4項目-->
@@ -66,19 +75,22 @@
       <% end %>
     </div>
     <div>
-      <h5>合計いいね数</h5>
-      <h4 class="pb-1 text-center rounded-lg" style="background-color:#eee;"><%= @favorites_count %> 件</h4>
+      <h5>[いいね]した数</h5>
+      <% unless @user.favorites.count == 0 %>
+        <%= link_to user_favorites_path(@user.id) do %><h4 class="pb-1 text-center rounded-lg" style="background-color:#eee;"><%= @user.favorites.count %> 件</h4><% end %>
+      <% else %>
+        <h4 class="pb-1 text-center rounded-lg" style="background-color:#eee;"><%= @user.favorites.count %> 件</h4>
+      <% end %>
     </div>
     <div>
-      <h5>合計コメント数</h5>
-      <h4 class="pb-1 text-center rounded-lg" style="background-color:#eee;"><%= @comments_count %> 件</h4>
+      <h5>[いいね]された数</h5>
+      <h4 class="pb-1 text-center rounded-lg" style="background-color:#eee;"><%= @favorites_count %> 件</h4>
     </div>
   </div>
 </div>
 
 <!--投稿一覧-->
 <h2 class="py-2 text-center"><%= @user.name %>の投稿一覧</h2>
-<div>
-  <%= render "public/posts/list", posts: @posts %>
-</div>
+
+<%= render "public/posts/list", posts: @posts %>
 

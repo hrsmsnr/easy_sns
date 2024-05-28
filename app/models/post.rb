@@ -4,6 +4,7 @@ class Post < ApplicationRecord
   has_many :post_details, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
+  has_many :favorited_by_users, through: :favorites, source: :user
 
   # post_detailsとまとめて登録する
   accepts_nested_attributes_for :post_details, allow_destroy: true
@@ -30,7 +31,7 @@ class Post < ApplicationRecord
   end
 
   enum category: { "日常": 0, "生活の知恵": 1, "遊び": 2, "料理": 3 }
-  
+
   # 検索方法分岐
   def self.looks(search, word)
     if search == "perfect_match"
