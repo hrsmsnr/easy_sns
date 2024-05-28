@@ -1,4 +1,4 @@
-<h1>投稿詳細</h1>
+<h1>[管理]投稿詳細</h1>
 
 <div class="row spacing-0">
   <div class="col-5 item-left m-2">
@@ -60,7 +60,7 @@
 
         <% if @post.post_image.attached? %>
           <div class="border-bottom">
-            <%= image_tag @post.post_image, style:"max-height:250px; width:100%; object-fit: contain;" %>
+            <%= image_tag @post.post_image, style:"max-height:250px; width:80%; object-fit: contain;" %>
           </div>
         <% end %>
         <!--内容-->

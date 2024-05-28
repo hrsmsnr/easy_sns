@@ -4,7 +4,7 @@
 <%= form_with model: @post, id: 'post_form', local: true do |f| %>
   <%= render "public/shared/error_messages", resource: @post %>
 
-  <div class="d-flex flex-column mt-1 m-0 border border-dark" style="max-height:700px; width:auto;">
+  <div class="d-flex flex-column mt-1 m-0 border border-dark">
     <!--投稿ステータスによって表示の変更・投稿者には表示-->
     <div class="card col spacing-0">
 
@@ -30,7 +30,7 @@
             <div class="d-flex h-100">
               <% if @post.post_image.attached? %>
                  <!--画像プレビュー-->
-                <div class="col-6 d-flex flex-column">
+                <div class="col-6 d-flex flex-column border-right">
                   <h4>変更後の画像</h4>
                   <div class="h-100" style="height:300px; width:auto;">
                     <div id="previews"></div>
@@ -38,10 +38,10 @@
                 </div>
 
 
-                <div class="border-left col-6">
+                <div class="col-6">
                   <h4>変更前の画像</h4>
                   <div class="row spacing-0" style="height:300px; width:auto;">
-                    <%= image_tag @post.get_post_image, style:"height:300px; width:auto;" %>
+                    <%= image_tag @post.get_post_image, class:"preview-image" %>
                   </div>
                 </div>
               <% else %>

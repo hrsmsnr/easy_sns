@@ -3,62 +3,71 @@
   <div class="spacing-0">
     <div class="jscroll">
       <% users.each do |user| %>
-        <div class="d-flex border border-dark pb-2 mb-2 user-item">
-          <div class="col-8">
-            <% if admin_signed_in? %>
-              <%= link_to admin_user_path(user.id) do %>
-                <div class="d-flex">
-                  <div class="col-4 spacing-0 text-center">
-                    <div class="p-2" style="height:150px;width:auto;"><%= image_tag user.get_user_image, class:"responsive-image" %></div>
-                    <div><%= user.name %></div>
-                  </div>
-                  <div class="col-8 p-2">
-                    <h5>自己紹介</h5>
-                    <div class="rounded-lg p-2 mb-auto" style="min-height:110px; background-color:#eee; word-wrap: break-word;">
-                      <p><%= simple_format(user.introduction) %></p>
+        <% if user.is_active? || admin_signed_in? %>
+          <div class="d-flex border border-dark pb-2 mb-2 user-item">
+            <div class="col-8">
+              <% if admin_signed_in? %>
+                <%= link_to admin_user_path(user.id) do %>
+                  <div class="d-flex">
+                    <div class="col-4 spacing-0 text-center">
+                      <div class="p-2" style="height:150px;width:auto;"><%= image_tag user.get_user_image, class:"responsive-image" %></div>
+                      <div><%= user.name %></div>
+                    </div>
+                    <div class="col-8 p-2">
+                      <h5>自己紹介</h5>
+                      <div class="rounded-lg p-2 mb-auto" style="min-height:110px; background-color:#eee; word-wrap: break-word;">
+                        <p><%= simple_format(user.introduction) %></p>
+                      </div>
                     </div>
                   </div>
-                </div>
-              <% end %>
-            <% else %>
-              <%= link_to user_path(user.id) do %>
-                <div class="d-flex text-dark">
-                  <div class="col-4 spacing-0 text-center">
-                    <div class="p-2" style="height:150px;width:auto;"><%= image_tag user.get_user_image, class:"responsive-image" %></div>
-                    <div><%= user.name %></div>
-                  </div>
-                  <div class="col-8 p-2">
-                    <h5>自己紹介</h5>
-                    <div class="rounded-lg p-2 mb-auto" style="min-height:110px; background-color:#eee; word-wrap: break-word;">
-                      <p><%= simple_format(user.introduction) %></p>
-                    </div>
-                  </div>
-                </div>
-              <% end %>
-            <% end %>
-          </div>
-          <div class="col-4 p-2">
-            <h5>投稿数:<%= user.posts.count %></h5>
-            <h5>フォロー:<%= user.followers.count %>人</h5>
-            <h5>フォロワー:<%= user.followeds.count %>人</h5>
-            <% unless user == current_user || admin_signed_in? %>
-              <div>
-                <% if current_user.following?(user) %>
-                  <%= link_to user_relationships_path(user.id), method: :delete do %>
-                    <div class="btn btn-danger">フォローを外す</div>
-                  <% end %>
-                <% else %>
-                  <%= link_to user_relationships_path(user.id), method: :post do %>
-                    <div class="btn btn-success">フォローする</div>
-                  <% end %>
                 <% end %>
-              </div>
-            <% else %>
-              <!--ログイン中のユーザーはフォローボタンなしに変更-->
-              <div></div>
-            <% end %>
+              <% else %>
+                <%= link_to user_path(user.id) do %>
+                  <div class="d-flex text-dark">
+                    <div class="col-4 spacing-0 text-center">
+                      <div class="p-2" style="height:150px;width:auto;"><%= image_tag user.get_user_image, class:"responsive-image" %></div>
+                      <div><%= user.name %></div>
+                    </div>
+                    <div class="col-8 p-2">
+                      <h5>自己紹介</h5>
+                      <div class="rounded-lg p-2 mb-auto" style="min-height:110px; background-color:#eee; word-wrap: break-word;">
+                        <p><%= simple_format(user.introduction) %></p>
+                      </div>
+                    </div>
+                  </div>
+                <% end %>
+              <% end %>
+            </div>
+            <div class="col-4 p-2">
+              <h5>投稿数:<%= user.posts.count %></h5>
+              <h5>フォロー:<%= user.followers.count %>人</h5>
+              <h5>フォロワー:<%= user.followeds.count %>人</h5>
+              <% unless user == current_user || admin_signed_in? %>
+                <div>
+                  <% if current_user.following?(user) %>
+                    <%= link_to user_relationships_path(user.id), method: :delete do %>
+                      <div class="btn btn-danger">フォローを外す</div>
+                    <% end %>
+                  <% else %>
+                    <%= link_to user_relationships_path(user.id), method: :post do %>
+                      <div class="btn btn-success">フォローする</div>
+                    <% end %>
+                  <% end %>
+                </div>
+              <% else %>
+                <!--ログイン中のユーザーはフォローボタンなしに変更-->
+                <div class="d-flex">
+                  <h5>ステータス ：</h5>
+                  <% if user.is_active == true %>
+                    <span class="p-1 rounded-lg bg-primary text-light">有効</span>
+                  <% else %>
+                    <span class="p-1 rounded-lg bg-secondary text-light">退会済み</span>
+                  <% end %>
+                </div>
+              <% end %>
+            </div>
           </div>
-        </div>
+        <% end %>
       <% end %>
       <div style="display: none;"><%= paginate users %></div>
     </div>
