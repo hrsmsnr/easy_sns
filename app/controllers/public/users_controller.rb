@@ -35,12 +35,17 @@ class Public::UsersController < ApplicationController
 
   def follows
     user = User.find(params[:user_id])
-    @users = user.following_users
+    @users = user.following_users.page(params[:page]).per(3)
   end
 
   def followers
     user = User.find(params[:user_id])
-    @users = user.follower_users
+    @users = user.follower_users.page(params[:page]).per(3)
+  end
+
+  def favorites
+    user = User.find(params[:user_id])
+    @posts = user.favorite_posts.page(params[:page]).per(3)
   end
 
   def edit

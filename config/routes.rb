@@ -30,6 +30,7 @@ Rails.application.routes.draw do
       resource :relationships, only: [:create, :destroy]
       get 'follows' => 'users#follows', as: 'follows'
       get 'followers' => 'users#followers', as: 'followers'
+      get 'favorites' => 'users#favorites', as: 'favorites'
 
     end
     patch 'users/:id/withdraw' => 'user#withdraw'

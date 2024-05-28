@@ -38,13 +38,17 @@
         <div class="p-2 m-0 row card-header border-dark">
           <div class="col d-flex align-items-center justify-content-between" style="object-fit: contain;">
             <h4><%= @post.title %></h4>
-            <% if @post.favorited_by?(current_user) %>
-              <%= link_to post_favorite_path(@post), method: :delete do %>
-                <h5>いいね済み(<%= @post.favorites.count %>)</h5>
-              <% end %>
+            <% if @post.user == current_user %>
+              <h5><i class="fa-solid fa-heart"style="color:#ffbf7f;"></i><%= @post.favorites.count %></h5>
             <% else %>
-              <%= link_to post_favorite_path(@post), method: :post do %>
-                <h5>いいね(<%= @post.favorites.count %>)</h5>
+              <% if @post.favorited_by?(current_user) %>
+                <%= link_to post_favorite_path(@post), method: :delete do %>
+                  <h5><i class="fa-solid fa-heart"style="color:#ff84c1;"></i><%= @post.favorites.count %></h5>
+                <% end %>
+              <% else %>
+                <%= link_to post_favorite_path(@post), method: :post do %>
+                  <h5><i class="fa-regular fa-heart"style="color:#ff84c1;"></i><%= @post.favorites.count %></h5>
+                <% end %>
               <% end %>
             <% end %>
           </div>
@@ -64,7 +68,8 @@
         <div class="flex-column spacing-0 h-100">
           <!--カテゴリ-->
           <div class="row spacing-0 justify-content-end">
-            <div class="px-3 py-1 bg-primary">
+
+            <div class="px-3 py-1" style="background-color:#ffe2c6;">
               カテゴリ：<%= @post.category %>
             </div>
           </div>

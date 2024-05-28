@@ -1,58 +1,87 @@
 <header class="vw-100 border-bottom border-dark" style="min-height:100px">
 
-  <nav class="navbar navbar-expand-xl navbar-light justify-content-between">
-    <a class="navbar-brand" href="/"><%= image_tag('header-logo.jpg', style: "max-height: 80px; width: auto;") %></a>
-    
-    
-    <div class="mt-2">
+  <nav class="navbar navbar-expand-xl navbar-light">
+    <!--ロゴ-->
+    <% if admin_signed_in? %>
+      <a class="navbar-brand justify-content-start" href="/admin/">
+        <%= image_tag('header-logo.jpg', style: "max-height: 80px; width: auto;") %>
+      </a>
+    <% else %>
+      <a class="navbar-brand justify-content-start" href="/">
+        <%= image_tag('header-logo.jpg', style: "max-height: 80px; width: auto;") %>
+      </a>
+    <% end %>
+
+    <!-- ログインの表示 -->
+    <div class="align-text-center justify-content-center">
       <% if admin_signed_in? %>
         管理者がログイン中
       <% elsif current_user %>
         <%= current_user.name %> さんがログイン中
       <% end %>
     </div>
-    
 
-    <div class="items-right">
+    <!-- ナビバー -->
+    <div class="ml-auto d-flex align-items-center">
+      <% if user_signed_in? %>
+        <div class="mr-3">
+          <%= render 'searches/search' %>
+        </div>
+      <% end %>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
                     aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav ml-auto">
-          <% if user_signed_in? %>
-            <div class="p-2"><%= render 'searches/search' %></div>
-          <% end %>
-          <!--adminヘッダー-->
+          <!-- adminヘッダー -->
           <% if admin_signed_in? %>
-            <li class="nav-item"><%= link_to "ユーザー一覧", admin_users_path, class: "btn btn-outline-secondary mr-3" %></li>
-            <li class="nav-item"><%= link_to "投稿一覧", admin_posts_path, class: "btn btn-outline-secondary mr-3" %></li>
-            <li class="nav-item"><%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "btn btn-outline-secondary mr-3" %></li>
-          <!--customersヘッダー-->
+            <li class="nav-item">
+              <%= link_to "ユーザー一覧", admin_users_path, class: "nav-link btn btn-outline-secondary mr-3" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "投稿一覧", admin_posts_path, class: "nav-link btn btn-outline-secondary mr-3" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "nav-link btn btn-outline-secondary mr-3" %>
+            </li>
+          <!-- customersヘッダー -->
           <% elsif user_signed_in? %>
-            <div>
-              <li class="nav-item"><%= link_to '新しい投稿', new_post_path, class: "btn btn-outline-secondary mr-3" %></li>
-              <li class="nav-item"><%= link_to "マイページ" , users_my_page_path, class: "btn btn-outline-secondary mr-3" %></li>
-            </div>
-            <div>
-              <li class="nav-item"><%= link_to '投稿一覧', posts_path, class: "btn btn-outline-secondary mr-3" %></li>
-              <li class="nav-item"><%= link_to 'ユーザー一覧', users_path, class: "btn btn-outline-secondary mr-3" %></li>
-            </div>
-            <div>
-              <li class="nav-item"><%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: "btn btn-outline-secondary mr-3" %></li>
-              <li class="nav-item"><%= link_to 'かんたんSNSとは', about_path, class: "btn btn-outline-secondary mr-3" %></li>
-            </div>
-          <!--ログイン前ヘッダー-->
+            <li class="nav-item">
+              <%= link_to '新しい投稿', new_post_path, class: "nav-link btn btn-outline-secondary mr-3" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "マイページ", users_my_page_path, class: "nav-link btn btn-outline-secondary mr-3" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to '投稿一覧', posts_path, class: "nav-link btn btn-outline-secondary mr-3" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to 'ユーザー一覧', users_path, class: "nav-link btn btn-outline-secondary mr-3" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: "nav-link btn btn-outline-secondary mr-3" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to 'かんたんSNSとは', about_path, class: "nav-link btn btn-outline-secondary mr-3" %>
+            </li>
+          <!-- ログイン前ヘッダー -->
           <% else %>
-            <li class="nav-item"><%= link_to 'About', about_path, class: "btn btn-outline-secondary mr-3" %></li>
-            <li class="nav-item"><%= link_to '新規登録', new_user_registration_path, class: "btn btn-outline-secondary mr-3" %></li>
-            <li class="nav-item"><%= link_to 'ログイン', new_user_session_path, class: "btn btn-outline-secondary mr-3" %></li>
+            <li class="nav-item">
+              <%= link_to 'About', about_path, class: "nav-link btn btn-outline-secondary mr-3" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to '新規登録', new_user_registration_path, class: "nav-link btn btn-outline-secondary mr-3" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to 'ログイン', new_user_session_path, class: "nav-link btn btn-outline-secondary mr-3" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to '管理者ログイン', new_admin_session_path, class: "nav-link btn btn-outline-secondary mr-3" %>
+            </li>
           <% end %>
-
         </ul>
       </div>
-
     </div>
   </nav>
-
 </header>

@@ -19,7 +19,7 @@
   <% else %>
     <%= form_with model: @post, url: admin_post_path(@post), method: :patch, local: true do |f| %>
         <%= f.hidden_field :is_public, value: true %>
-        <button type="submit" class="btn btn-primary">公開に更新</button>
+        <button type="submit" class="btn btn-primary m-2">公開に更新</button>
     <% end %>
   <% end %>
 
@@ -32,9 +32,11 @@
   <div class="card col-md-8 border-dark spacing-0" style="min-height:300px">
 
     <div class="p-2 px-3 m-0 row card-header border-dark">
-      <div class="col" style:"object-fit: contain;">
+      <div class="col d-flex align-items-center justify-content-between" style="object-fit: contain;">
         <h4><%= @post.title %></h4>
-      </div>
+
+        <h5><i class="fa-solid fa-heart"style="color:#ffbf7f;"></i><%= @post.favorites.count %></h5>
+
         <% if @post.is_public? %>
           <div class="text-right align-content-center m-2">
           <!--投稿ステータスによって公開の変更-->
@@ -45,13 +47,16 @@
             <span class="p-2 rounded-lg bg-danger text-light">非公開</span>
           </div>
         <% end %>
+      </div>
     </div>
 
     <div class="row spacing-0">
       <div class="col-lg h-100">
-        <div class="py-2 px-4 m-0 row justify-content-start">
-          カテゴリ：<%= @post.category %>
-        </div>
+          <div class="row spacing-0 justify-content-end">
+            <div class="px-3 py-1" style="background-color:#ffe2c6;">
+              カテゴリ：<%= @post.category %>
+            </div>
+          </div>
 
         <% if @post.post_image.attached? %>
           <div class="border-bottom">

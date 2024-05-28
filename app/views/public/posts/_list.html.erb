@@ -1,9 +1,5 @@
 <div class="col-lg-6 col-md-8 offset-lg-3 offset-md-2">
-
-
   <div class="raw spacing-0 scroll-list jscroll">
-
-
   <% posts.each do |post| %>
     <!--投稿ステータスによって表示の変更・投稿者には表示-->
     <% if post.is_public? || post.user == current_user || admin_signed_in? %>
@@ -49,15 +45,19 @@
           <% end %>
           <!--いいねボタン-->
           <% if admin_signed_in? %>
-            <h5>いいね(<%= post.favorites.count %>)</h5>
+            <h5><i class="fa-solid fa-heart"style="color:#ff84c1;"></i><%= post.favorites.count %></h5>
           <% else %>
-            <% if post.favorited_by?(current_user) %>
-              <%= link_to post_favorite_path(post), method: :delete do %>
-                <h5>いいね済み(<%= post.favorites.count %>)</h5>
-              <% end %>
+            <% if post.user == current_user %>
+              <h5><i class="fa-solid fa-heart"style="color:#ffbf7f;"></i><%= post.favorites.count %></h5>
             <% else %>
-              <%= link_to post_favorite_path(post), method: :post do %>
-                <h5>いいね(<%= post.favorites.count %>)</h5>
+              <% if post.favorited_by?(current_user) %>
+                <%= link_to post_favorite_path(post), method: :delete do %>
+                  <h5><i class="fa-solid fa-heart"style="color:#ff84c1;"></i><%= post.favorites.count %></h5>
+                <% end %>
+              <% else %>
+                <%= link_to post_favorite_path(post), method: :post do %>
+                  <h5><i class="fa-regular fa-heart"style="color:#ff84c1;"></i><%= post.favorites.count %></h5>
+                <% end %>
               <% end %>
             <% end %>
           <% end %>
@@ -143,11 +143,7 @@
       <!--非表示-->
     <% end %>
   <% end %>
-
-
-  <%= paginate posts %>
-  <div style="visibility: hidden;"></div>
+  <div style="display: none;"><%= paginate posts %></div>
   </div>
-
 
 </div>
