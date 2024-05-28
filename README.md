@@ -46,19 +46,16 @@
 - フォロー・フォロワー一覧表示機能
 - コメント機能
 - ユーザー・投稿検索機能
-- タブ切り替え機能
-- 画像登録前表示機能(画像プレビュー機能)
+- タブ切り替え機能(cocoon)
+- 画像登録前表示機能(画像プレビュー機能)(js)
 
 ## 開発環境
 - OS：Linux(CentOS)
 - 言語：HTML,CSS,JavaScript,Ruby,SQL
 - フレームワーク：Ruby on Rails
-- JSライブラリ：jQuery
+- JSライブラリ：jQuery jscroll
 - IDE：Cloud9
 ​
 ## 使用素材
 - Canva(キャンバ)
 - https://www.canva.com/
-- 外部サービスの画像素材・音声素材を使用した場合は、必ずサービス名とURLを明記してください。
-- アプリケーションの実装に使用したgem/bootstrapのリファレンスなどの記載は不要です。
-- 使用しない場合は、使用素材の項目をREADMEから削除してください。
