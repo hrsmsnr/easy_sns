@@ -4,9 +4,9 @@
 <%= form_with model: @post, id: 'post_form', local: true do |f| %>
   <%= render "public/shared/error_messages", resource: @post %>
 
-  <div class="d-flex">
+  <div class="d-flex flex-column mt-1 m-0 border border-dark" style="max-height:700px; width:auto;">
     <!--投稿ステータスによって表示の変更・投稿者には表示-->
-    <div class="card col border-dark spacing-0" style="min-height:300px">
+    <div class="card col spacing-0">
 
       <div class="p-2 m-0 row card-header border-dark">
         <div class="col" style="object-fit: contain;">
@@ -19,40 +19,44 @@
 
       <div class="row spacing-0">
         <div class="col-lg spacing-0 h-100">
+
           <div class="row spacing-0 justify-content-end">
             <div class="px-3 py-1" style="background-color:#ffe2c6;">
               カテゴリ：<%= @post.category %>
             </div>
           </div>
 
-          <div class="border-bottom">
-            <div class="image_field p-2">
-              <div class="d-flex">
-                <% if @post.post_image.attached? %>
-                   <!--画像プレビュー-->
-                  <div class="border-left col-6">
-                    <h4>変更前の画像</h4>
-                    <div class="row spacing-0" style="height:300px; width:auto;">
-                      <%= image_tag @post.get_post_image, style:"max-height:300px;" %>
-                    </div>
+          <div class="image_field m-2 border-bottom">
+            <div class="d-flex h-100">
+              <% if @post.post_image.attached? %>
+                 <!--画像プレビュー-->
+                <div class="col-6 d-flex flex-column">
+                  <h4>変更後の画像</h4>
+                  <div class="h-100" style="height:300px; width:auto;">
+                    <div id="previews"></div>
                   </div>
-                  <div class="col-6">
-                    <h4>変更後の画像</h4>
-                    <div class="row spacing-0" style="height:300px; width:auto;">
-                      <div id="previews"></div>
-                    </div>
+                </div>
+
+
+                <div class="border-left col-6">
+                  <h4>変更前の画像</h4>
+                  <div class="row spacing-0" style="height:300px; width:auto;">
+                    <%= image_tag @post.get_post_image, style:"height:300px; width:auto;" %>
                   </div>
-                <% else %>
-                  <div class="col-md-6">
-                    <div class="row spacing-0" style="height:300px; width:auto;">
-                      <div id="previews"></div>
-                    </div>
+                </div>
+              <% else %>
+                <div class="col-md-6">
+                  <div class="row spacing-0" style="height:200px; width:auto;">
+                    <div id="previews"></div>
                   </div>
-                <% end %>
-              </div>
-              <%= f.label :post_image, "画像" %>
-              <%= f.file_field :post_image, id:"post_image", accept:'image/*'%>
+                </div>
+              <% end %>
             </div>
+          </div>
+
+          <div class="p-2 pt-3 m-0">
+            <%= f.label :post_image, "画像" %>
+            <%= f.file_field :post_image, id:"post_image", accept:'image/*'%>
           </div>
           <!--内容-->
           <div class="p-2 pt-3 m-0">

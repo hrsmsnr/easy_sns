@@ -11,10 +11,10 @@
 <%= form_with model: @user, id: 'user_form' , url: user_path do |f| %>
   <div class="d-flex flex-column mt-1 m-0 border border-dark" style="min-height:350px; max-width:auto;">
     <div class="d-flex h-100">
-      <div class="d-flex col-6 spacing-0 border-right border-dark h-100">
+      <div class="d-flex col-6 spacing-0 h-100">
         <!--1/4項目-->
         <div class="col-6 d-flex p-3">
-          <div class="row spacing-0 h-100" style="height:220px; width:auto;">
+          <div class="h-100" style="height:300px; width:auto;">
             <div id="previews"></div>
           </div>
         </div>
@@ -36,8 +36,8 @@
       </div>
       <div class="d-flex col-6 spacing-0 h-100">
         <!--3/4項目-->
-        <div class="col-6 p-3">
-          <div style="height:220px; width:auto;">
+        <div class="col-6 p-3 border-dark border-left">
+          <div style="height:300px; width:auto;">
             <%= image_tag @user.get_user_image, class:"responsive-image" %>
           </div>
         </div>
@@ -60,7 +60,7 @@
     </div>
 
     <div class="d-flex border-top">
-      <div class="d-flex col-6 spacing-0 border-right border-dark p-1">
+      <div class="d-flex col-6 spacing-0 p-1">
         <div class="col-6 pl-0">
           <h5 class="p-1"><%= f.label :user_image, "ユーザー画像" %></h5>
           <div><%= f.file_field :user_image,  accept:'image/*' %></div>
@@ -71,7 +71,7 @@
           <div class="row spacing-0"><%= f.email_field :email, autocomplete: "email" %></div>
         </div>
       </div>
-      <div class="d-flex col-6 spacing-0 p-1">
+      <div class="d-flex col-6 spacing-0 border-left border-dark p-1">
         <div class="col-6">
           <h5></h5>
           <div></div>
@@ -81,10 +81,9 @@
           <div class="row p-2 m-0"><div class="px-2" style="background-color:#eee;"><%= @user.email %></div></div>
         </div>
       </div>
-
     </div>
-
   </div>
+
 
   <div class="d-flex justify-content-between">
     <div class="p-3">
