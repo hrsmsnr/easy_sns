@@ -1,4 +1,4 @@
-<div class="col-lg-6 col-md-8 offset-lg-3 offset-md-2">
+<div class="col-lg-6 col-md-8 offset-lg-3 offset-md-2 min-vh-100">
   <div class="raw spacing-0 scroll-list jscroll">
   <% posts.each do |post| %>
     <!--投稿ステータスによって表示の変更・投稿者には表示-->
@@ -61,8 +61,21 @@
               <% end %>
             <% end %>
           <% end %>
-          <!--カテゴリ-->
-          カテゴリ：<%= post.category %>
+          <!--カテゴリ ジャンルごとにクラス変更-->
+          <div class="p-1
+          <% case post.category %>
+          <% when "日常" then %>
+             usual-color
+          <% when "生活の知" then %>
+             lifehack-color
+          <% when "遊び" then %>
+             play-color
+          <% when "料理" then %>
+             dish-color
+          <% end %>
+          ">
+            カテゴリ：<%= post.category %>
+          </div>
         </div>
         <!--画像の有無で画像部分を非表示・内容もリンクのためまとめて記述-->
         <% if admin_signed_in? %>

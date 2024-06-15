@@ -32,6 +32,19 @@ class Post < ApplicationRecord
 
   enum category: { "日常": 0, "生活の知恵": 1, "遊び": 2, "料理": 3 }
 
+  def category_text_color
+    case category
+      when '日常'
+        
+      when '生活の知恵'
+        
+      when '遊び'
+        
+      when '料理'
+        
+    end
+  end
+
   # 検索方法分岐
   def self.looks(search, word)
     if search == "perfect_match"
@@ -46,4 +59,5 @@ class Post < ApplicationRecord
       @post = Post.all
     end
   end
+
 end
