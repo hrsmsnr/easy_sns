@@ -31,7 +31,16 @@
 - 異世代との会話でギャップを感じた時　など
 
 ## 設計書
-後ほど作成予定
+- 実装機能リスト(Googleスプレッドシート)  
+https://docs.google.com/spreadsheets/d/1U1cLHh_dRo6lKX19gu-AxbUGHTFrCd6vS4bhVy42UP4/edit?gid=1898975908#gid=1898975908
+- アプリケーション詳細設計書(Googleスプレッドシート)  
+https://docs.google.com/spreadsheets/d/14UqPwOdZpeXUZ1Qb1ofBVvG5B3txuZM5px9zyMLG7i0/edit?gid=549108681#gid=549108681
+- テーブル定義書(Googleスプレッドシート)  
+https://docs.google.com/spreadsheets/d/1gD7PMXh9ddX1hD4iscB8WzidfG_m9jz-0QNLFT1DyrM/edit?gid=1044500859#gid=1044500859
+- AWSインフラ設計書(Googleスプレッドシート)  
+https://docs.google.com/spreadsheets/d/1BRg70RRYzd6uUX88rLwoBMkHHuraQ4kc1PuAF2djhHE/edit?gid=0#gid=0
+- AWS構成図(diagrams.net)  
+https://app.diagrams.net/?splash=0&libs=aws4#G1JAxtXoewVIfjsGtTrsVoFJHUkitCzdlT#%7B%22pageId%22%3A%223Qa-Rb4EaQss_YrXUZWA%22%7D
 
 ## 実装機能
 - ゲストログイン
