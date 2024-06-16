@@ -32,7 +32,7 @@
 
 ## 設計書
 - 実装機能リスト(Googleスプレッドシート)  
-https://docs.google.com/spreadsheets/d/1U1cLHh_dRo6lKX19gu-AxbUGHTFrCd6vS4bhVy42UP4/edit?gid=1513556476#gid=1513556476
+https://docs.google.com/spreadsheets/d/1U1cLHh_dRo6lKX19gu-AxbUGHTFrCd6vS4bhVy42UP4/edit?gid=1898975908#gid=1898975908
 - アプリケーション詳細設計書(Googleスプレッドシート)  
 https://docs.google.com/spreadsheets/d/14UqPwOdZpeXUZ1Qb1ofBVvG5B3txuZM5px9zyMLG7i0/edit?gid=549108681#gid=549108681
 - テーブル定義書(Googleスプレッドシート)  
