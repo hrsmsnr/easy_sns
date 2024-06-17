@@ -8,22 +8,22 @@
       <div class="col-6">
         <% if user_signed_in? %>
           <%= link_to posts_path do %>
-            <button class="btn m-3 p-5 w-100 h-100"style="background-color: #ffb7b7;"><h3>投稿を見る</h3></button>
+            <button class="btn m-3 p-5 w-100 h-100 posts-btn"><h3>投稿を見る</h3></button>
           <% end %>
         <% else %>
           <%= link_to new_user_registration_path do %>
-            <button class="btn m-3 p-5 w-100 h-100"style="background-color: #b7ffb7;"><h3>初めての方はこちらから</h3></button>
+            <button class="btn m-3 p-5 w-100 h-100 new-user-btn"><h3>初めての方はこちらから</h3></button>
           <% end %>
         <% end %>
       </div>
       <div class="col-6">
         <% if user_signed_in? %>
           <%= link_to users_path do %>
-            <button class="btn m-3 p-5 w-100 h-100"style="background-color: #b7ffb7;"><h3>他のユーザーを見る</h3></button>
+            <button class="btn m-3 p-5 w-100 h-100 users-btn"><h3>他のユーザーを見る</h3></button>
           <% end %>
         <% else %>
           <%= link_to new_user_session_path do %>
-            <button class="btn m-3 p-5 w-100 h-100"style="background-color: #b7ffff;"><h3>登録済みの方はこちらから</h3></button>
+            <button class="btn m-3 p-5 w-100 h-100 login-user-btn"><h3>登録済みの方はこちらから</h3></button>
           <% end %>
         <% end %>
       </div>
@@ -32,17 +32,17 @@
       <div class="col-6">
         <% if user_signed_in? %>
           <%= link_to users_my_page_path do %>
-            <button class="btn m-3 p-5 w-100 h-100"style="background-color: #bcffff;"><h3>マイページ</h3></button>
+            <button class="btn m-3 p-5 w-100 h-100 mypage-btn"><h3>マイページ</h3></button>
           <% end %>
         <% else %>
           <%= link_to users_guest_sign_in_path, method: :post do %>
-            <button class="btn m-3 p-5 w-100 h-100"style="background-color: #bcbcff;"><h3>お試しログイン</h3></button>
+            <button class="btn m-3 p-5 w-100 h-100 login-gest-btn"><h3>お試しログイン</h3></button>
           <% end %>
         <% end %>
       </div>
       <div class="col-6">
         <%= link_to about_path do %>
-          <button class="btn m-3 p-5 w-100 h-100"style="background-color: #ffdbb7;"><h3>かんたんSNSとは</h3></button>
+          <button class="btn m-3 p-5 w-100 h-100 about-btn"><h3>かんたんSNSとは</h3></button>
         <% end %>
       </div>
     </div>

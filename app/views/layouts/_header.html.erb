@@ -35,47 +35,47 @@
           <!-- adminヘッダー -->
           <% if admin_signed_in? %>
             <li class="nav-item">
-              <%= link_to "ユーザー一覧", admin_users_path, class: "nav-link btn btn-outline-secondary mr-3", style: "background-color: #b7ffb7;" %>
+              <%= link_to "ユーザー一覧", admin_users_path, class: "nav-link btn btn-outline-secondary users-btn mr-3" %>
             </li>
             <li class="nav-item">
-              <%= link_to "投稿一覧", admin_posts_path, class: "nav-link btn btn-outline-secondary mr-3", style: "background-color: #ffb7b7;" %>
+              <%= link_to "投稿一覧", admin_posts_path, class: "nav-link btn btn-outline-secondary posts-btn mr-3" %>
             </li>
             <li class="nav-item">
-              <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "nav-link btn btn-outline-secondary mr-3", style: "background-color: #cccccc;" %>
+              <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "nav-link btn btn-outline-secondary logout-btn mr-3" %>
             </li>
           <!-- customersヘッダー -->
           <% elsif user_signed_in? %>
             <li class="nav-item">
-              <%= link_to '新しい投稿', new_post_path, class: "nav-link btn btn-outline-secondary mr-3", style: "background-color: #ffd700;" %>
+              <%= link_to '新しい投稿', new_post_path, class: "nav-link btn btn-outline-secondary new-post-btn mr-3" %>
             </li>
             <li class="nav-item">
-              <%= link_to "マイページ", users_my_page_path, class: "nav-link btn btn-outline-secondary mr-3", style: "background-color: #bcffff;" %>
+              <%= link_to "マイページ", users_my_page_path, class: "nav-link btn btn-outline-secondary mypage-btn mr-3" %>
             </li>
             <li class="nav-item">
-              <%= link_to '投稿一覧', posts_path, class: "nav-link btn btn-outline-secondary mr-3", style: "background-color: #ffb7b7;" %>
+              <%= link_to '投稿一覧', posts_path, class: "nav-link btn btn-outline-secondary posts-btn mr-3" %>
             </li>
             <li class="nav-item">
-              <%= link_to 'ユーザー一覧', users_path, class: "nav-link btn btn-outline-secondary mr-3", style: "background-color: #b7ffb7;" %>
+              <%= link_to 'ユーザー一覧', users_path, class: "nav-link btn btn-outline-secondary users-btn mr-3" %>
             </li>
             <li class="nav-item">
-              <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: "nav-link btn btn-outline-secondary mr-3", style: "background-color: #cccccc;" %>
+              <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: "nav-link btn btn-outline-secondary logout-btn mr-3" %>
             </li>
             <li class="nav-item">
-              <%= link_to 'かんたんSNSとは', about_path, class: "nav-link btn btn-outline-secondary mr-3", style: "background-color: #ffdbb7;" %>
+              <%= link_to 'かんたんSNSとは', about_path, class: "nav-link btn btn-outline-secondary about-btn mr-3" %>
             </li>
           <!-- ログイン前ヘッダー -->
           <% else %>
             <li class="nav-item">
-              <%= link_to 'かんたんSNSとは', about_path, class: "nav-link btn btn-outline-secondary mr-3", style: "background-color: #ffdbb7;" %>
+              <%= link_to 'かんたんSNSとは', about_path, class: "nav-link btn btn-outline-secondary about-btn mr-3" %>
             </li>
             <li class="nav-item">
-              <%= link_to '新規登録', new_user_registration_path, class: "nav-link btn btn-outline-secondary mr-3", style: "background-color: #b7ffb7;" %>
+              <%= link_to '新規登録', new_user_registration_path, class: "nav-link btn btn-outline-secondary new-user-btn mr-3" %>
             </li>
             <li class="nav-item">
-              <%= link_to 'ログイン', new_user_session_path, class: "nav-link btn btn-outline-secondary mr-3", style: "background-color: #b7ffff;" %>
+              <%= link_to 'ログイン', new_user_session_path, class: "nav-link btn btn-outline-secondary login-user-btn mr-3" %>
             </li>
             <li class="nav-item">
-              <%= link_to '管理者ログイン', new_admin_session_path, class: "nav-link btn btn-outline-secondary mr-3", style: "background-color: #80aba9;" %>
+              <%= link_to '管理者ログイン', new_admin_session_path, class: "nav-link btn btn-outline-secondary login-admin-btn mr-3" %>
             </li>
           <% end %>
         </ul>

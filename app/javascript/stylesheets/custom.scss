@@ -13,6 +13,7 @@
   max-height: 300px;
   object-fit: contain; /* 画像のアスペクト比を維持しながら、親要素に収める */
 }
+
 .usual-color {
   background-color: #ffffcc;
 }
@@ -25,21 +26,64 @@
 .dish-color {
   background-color: #ffcccc;
 }
+
 .about-btn {
-  background-color: #ffcccc;
+  background-color: #ffdbb7;
 }
+  .about-btn:hover {
+    background-color: #ffbf7f;
+  }
 .login-user-btn {
-  background-color: #ffcccc;
+  background-color: #b7ffff;
 }
+  .login-user-btn:hover {
+    background-color: #7fffff;
+  }
+.login-gest-btn {
+  background-color: #bcbcff;
+}
+  .login-gest-btn:hover {
+    background-color: #7f7fff;
+  }
 .login-admin-btn {
-  background-color: #ffcccc;
+  background-color: #80aba9;
 }
+  .login-admin-btn:hover {
+    background-color: #60807e;
+  }
 .logout-btn {
-  background-color: #ffcccc;
+  background-color: #cccccc;
 }
+  .logout-btn:hover {
+    background-color: #8c8c8c;
+  }
 .posts-btn {
-  background-color: #ffcccc;
+  background-color: #ffb7b7;
 }
+  .posts-btn:hover {
+    background-color: #ff7f7f;
+  }
 .users-btn {
-  background-color: #ffcccc;
+  background-color: #b7ffb7;
 }
+  .users-btn:hover {
+    background-color: #7fff7f;
+  }
+.new-user-btn {
+  background-color: #b7ffb7;
+}
+  .new-user-btn:hover {
+    background-color: #7fff7f;
+  }
+.new-post-btn {
+  background-color: #ffd700;
+}
+  .new-post-btn:hover {
+    background-color: #e6c300;
+  }
+.mypage-btn {
+  background-color: #bcffff;
+}
+  .mypage-btn:hover {
+    background-color: #7fffff;
+  }
