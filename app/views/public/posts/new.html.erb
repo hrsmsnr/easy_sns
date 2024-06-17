@@ -19,7 +19,7 @@
 
       <div class="row spacing-0">
         <div class="col-lg h-100">
-          <div class="py-2 p-2 m-0 row justify-content-start">
+          <div class="py-2 p-2 m-0 row justify-content-end">
             <div class="field">
               <%= f.label :category, "カテゴリ" %>：
               <%= f.select :category, Post.categories.keys.map { |c| [c, c] }, {}, { id: 'post_category' } %>
@@ -57,7 +57,7 @@
           <% end %>
 
           <div class="mt-auto text-right mx-3">
-            <p>投稿日：</p>
+            <p>投稿日：<%= Date.today.strftime('%Y年%m月%d日') %></p>
           </div>
         </div>
       </div>

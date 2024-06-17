@@ -4,15 +4,15 @@
   <%= render "public/shared/error_messages", resource: resource %>
   <div class="d-flex flex-column mt-1 m-0 border border-dark  w-100" style="min-height:230px;">
 
-    <div class="d-flex w-100 h-100">
-      <!--1/4項目-->
-      <div class="col-6 d-flex p-3">
-        <div class="border border-dark h-100" style="height:300px; width:100%;">
+    <div class="row spacing-0">
+      <!--上1/2項目-->
+      <div class="col-12 col-md-6 p-3">
+        <div class="border border-dark" style="height:300px; width:100%;">
           <div id="previews"></div>
         </div>
       </div>
-      <!--2/4項目-->
-      <div class="col-6 p-3">
+      <!--上2/2項目-->
+      <div class="col-12 col-md-6 p-3">
         <div>
           <h5>ユーザーネーム(後から変更可能)</h5>
           <h4>
@@ -28,27 +28,25 @@
       </div>
     </div>
 
-    <div class="d-flex border-top">
-      <div class="d-flex p-1">
-        <div>
-          <h5 class="p-1"><%= f.label :user_image, "ユーザー画像" %></h5>
+    <div class="row spacing-0 border-top">
+      <div class="d-flex flex-column col-12 col-lg-6 p-1">
+        <div class="p-2 m-0">
+          <h5><%= f.label :user_image, "ユーザー画像" %></h5>
           <div><%= f.file_field :user_image,  accept:'image/*' %></div>
-          <span class="file-name"></span>
         </div>
-        <div class="row p-2 m-0">
+        <div class="p-2 m-0">
           <h5><%= f.label :email, "メールアドレス" %></h5>
-          <div><%= f.email_field :email, autocomplete: "email" %></div>
+          <div><%= f.email_field :email, autocomplete: "email", class:"w-100" %></div>
         </div>
-        <div class="row p-2 m-0">
-          <h5><%= f.label :password,"パスワード" %></h5>
-          <% if @minimum_password_length %>
-            <em>(英数字<%= @minimum_password_length %> 字以上)</em>
-          <% end %><br />
-          <div><%= f.password_field :password, autocomplete: "new-password" %></div>
+      </div>
+      <div class="d-flex flex-column col-12 col-lg-6 p-1">
+        <div class="p-2 m-0">
+          <h5><%= f.label :password,"パスワード" %>(英数字<%= @minimum_password_length %> 字以上)</h5>
+          <div><%= f.password_field :password, autocomplete: "new-password", class:"w-100" %></div>
         </div>
-        <div class="row p-2 m-0">
+        <div class="p-2 m-0">
           <h5><%= f.label :password_confirmation,"パスワード(再確認)" %></h5>
-          <div><%= f.password_field :password_confirmation, autocomplete: "new-password" %></div>
+          <div><%= f.password_field :password_confirmation, autocomplete: "new-password", class:"w-100" %></div>
         </div>
       </div>
     </div>
