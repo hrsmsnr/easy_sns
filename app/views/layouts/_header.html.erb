@@ -1,6 +1,5 @@
-<header class="vw-100 border-bottom border-dark" style="min-height:100px">
-
-  <nav class="navbar navbar-expand-xl navbar-light">
+<header class="vw-100" style="min-height:130px">
+  <nav class="navbar navbar-expand-xl navbar-light bg-light fixed-top border-bottom border-dark">
     <!--ロゴ-->
     <% if admin_signed_in? %>
       <a class="navbar-brand justify-content-start" href="/admin/">
@@ -21,65 +20,65 @@
       <% end %>
     </div>
 
-    <!-- ナビバー -->
-    <div class="ml-auto d-flex align-items-center">
-      <div class="mr-3">
-        <%= render 'searches/search' %>
-      </div>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
-                    aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNavDropdown">
-        <ul class="navbar-nav ml-auto">
-          <!-- adminヘッダー -->
-          <% if admin_signed_in? %>
-            <li class="nav-item">
-              <%= link_to "ユーザー一覧", admin_users_path, class: "nav-link btn btn-outline-secondary users-btn mr-3" %>
-            </li>
-            <li class="nav-item">
-              <%= link_to "投稿一覧", admin_posts_path, class: "nav-link btn btn-outline-secondary posts-btn mr-3" %>
-            </li>
-            <li class="nav-item">
-              <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "nav-link btn btn-outline-secondary logout-btn mr-3" %>
-            </li>
-          <!-- customersヘッダー -->
-          <% elsif user_signed_in? %>
-            <li class="nav-item">
-              <%= link_to '新しい投稿', new_post_path, class: "nav-link btn btn-outline-secondary new-post-btn mr-3" %>
-            </li>
-            <li class="nav-item">
-              <%= link_to "マイページ", users_my_page_path, class: "nav-link btn btn-outline-secondary mypage-btn mr-3" %>
-            </li>
-            <li class="nav-item">
-              <%= link_to '投稿一覧', posts_path, class: "nav-link btn btn-outline-secondary posts-btn mr-3" %>
-            </li>
-            <li class="nav-item">
-              <%= link_to 'ユーザー一覧', users_path, class: "nav-link btn btn-outline-secondary users-btn mr-3" %>
-            </li>
-            <li class="nav-item">
-              <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: "nav-link btn btn-outline-secondary logout-btn mr-3" %>
-            </li>
-            <li class="nav-item">
-              <%= link_to 'かんたんSNSとは', about_path, class: "nav-link btn btn-outline-secondary about-btn mr-3" %>
-            </li>
-          <!-- ログイン前ヘッダー -->
-          <% else %>
-            <li class="nav-item">
-              <%= link_to 'かんたんSNSとは', about_path, class: "nav-link btn btn-outline-secondary about-btn mr-3" %>
-            </li>
-            <li class="nav-item">
-              <%= link_to '新規登録', new_user_registration_path, class: "nav-link btn btn-outline-secondary new-user-btn mr-3" %>
-            </li>
-            <li class="nav-item">
-              <%= link_to 'ログイン', new_user_session_path, class: "nav-link btn btn-outline-secondary login-user-btn mr-3" %>
-            </li>
-            <li class="nav-item">
-              <%= link_to '管理者ログイン', new_admin_session_path, class: "nav-link btn btn-outline-secondary login-admin-btn mr-3" %>
-            </li>
-          <% end %>
-        </ul>
-      </div>
+    <!-- ハンバーガーメニューボタン -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- ナビアイテム -->
+    <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+      <ul class="navbar-nav">
+        <!-- 検索フォーム -->
+        <div class="align-content-center mr-3">
+          <%= render 'searches/search' %>
+        </div>
+        <!-- adminヘッダー -->
+        <% if admin_signed_in? %>
+          <li class="nav-item py-1">
+            <%= link_to "ユーザー一覧", admin_users_path, class: "nav-link btn btn-outline-secondary users-btn mr-3" %>
+          </li>
+          <li class="nav-item py-1">
+            <%= link_to "投稿一覧", admin_posts_path, class: "nav-link btn btn-outline-secondary posts-btn mr-3" %>
+          </li>
+          <li class="nav-item py-1">
+            <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "nav-link btn btn-outline-secondary logout-btn mr-3" %>
+          </li>
+        <!-- customersヘッダー -->
+        <% elsif user_signed_in? %>
+          <li class="nav-item py-1">
+            <%= link_to '新しい投稿', new_post_path, class: "nav-link btn btn-outline-secondary new-post-btn mr-3" %>
+          </li>
+          <li class="nav-item py-1">
+            <%= link_to "マイページ", users_my_page_path, class: "nav-link btn btn-outline-secondary mypage-btn mr-3" %>
+          </li>
+          <li class="nav-item py-1">
+            <%= link_to '投稿一覧', posts_path, class: "nav-link btn btn-outline-secondary posts-btn mr-3" %>
+          </li>
+          <li class="nav-item py-1">
+            <%= link_to 'ユーザー一覧', users_path, class: "nav-link btn btn-outline-secondary users-btn mr-3" %>
+          </li>
+          <li class="nav-item py-1">
+            <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: "nav-link btn btn-outline-secondary logout-btn mr-3" %>
+          </li>
+          <li class="nav-item py-1">
+            <%= link_to 'かんたんSNSとは', about_path, class: "nav-link btn btn-outline-secondary about-btn mr-3" %>
+          </li>
+        <!-- ログイン前ヘッダー -->
+        <% else %>
+          <li class="nav-item py-1">
+            <%= link_to 'かんたんSNSとは', about_path, class: "nav-link btn btn-outline-secondary about-btn mr-3" %>
+          </li>
+          <li class="nav-item py-1">
+            <%= link_to '新規登録', new_user_registration_path, class: "nav-link btn btn-outline-secondary new-user-btn mr-3" %>
+          </li>
+          <li class="nav-item py-1">
+            <%= link_to 'ログイン', new_user_session_path, class: "nav-link btn btn-outline-secondary login-user-btn mr-3" %>
+          </li>
+          <li class="nav-item py-1">
+            <%= link_to '管理者ログイン', new_admin_session_path, class: "nav-link btn btn-outline-secondary login-admin-btn mr-3" %>
+          </li>
+        <% end %>
+      </ul>
     </div>
   </nav>
 </header>

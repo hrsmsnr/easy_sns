@@ -87,3 +87,28 @@
   .mypage-btn:hover {
     background-color: #7fffff;
   }
+
+@media (max-width: 1600px) {
+  .navbar-collapse {
+    display: none;
+  }
+
+  .navbar-toggler {
+    display: block;
+  }
+
+  .navbar-collapse.collapse.show {
+    display: block;
+  }
+}
+
+/* 768px以上でナビゲーションバーを表示 */
+@media (min-width: 1600px) {
+  .navbar-toggler {
+    display: none;
+  }
+
+  .navbar-collapse {
+    display: flex !important;
+  }
+}
