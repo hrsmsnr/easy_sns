@@ -9,7 +9,7 @@
   margin: 0;
 }
 .preview-image {
-  max-width: 300px;
+  max-width: 100%;
   max-height: 300px;
   object-fit: contain; /* 画像のアスペクト比を維持しながら、親要素に収める */
 }
