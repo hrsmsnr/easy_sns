@@ -17,8 +17,10 @@ class Public::CommentsController < ApplicationController
   end
 
   def destroy
-    Comment.find(params[:id]).destroy
-    flash[:success] = 'コメントの削除が完了しました'
+    if comment.user == current_user || admin_signed_in?
+      Comment.find(params[:id]).destroy
+      flash[:success] = 'コメントの削除が完了しました'
+    end
     redirect_to post_path(params[:post_id])
   end
 
