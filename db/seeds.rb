@@ -5,6 +5,7 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-Admin.create(email: "admin@admin",password: "adminadmin")
-User.create(name: "ユーザー１",email: "user@user",password: "useruser")
-Post.create(user_id: 1,title: "タイトル1",body: "内容1",category: 0,is_public: true)
+admin = Admin.create(email: "admin@admin",password: "adminadmin")
+user = User.create(name: "ユーザー１",email: "user@user",password: "useruser")
+
+Post.create(user_id: user.id,title: "タイトル1",body: "内容1",category: 0,is_public: true)
