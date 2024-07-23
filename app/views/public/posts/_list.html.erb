@@ -74,7 +74,18 @@
              dish-color
           <% end %>
           ">
-            カテゴリ：<%= post.category %>
+            カテゴリ：<%= post.category, class:"p-1
+            <% case post.category %>
+            <% when "日常" then %>
+               usual-color
+            <% when "生活の知恵" then %>
+               lifehack-color
+            <% when "遊び" then %>
+               play-color
+            <% when "料理" then %>
+               dish-color
+            <% end %>
+            "%>
           </div>
         </div>
         <!--画像の有無で画像部分を非表示・内容もリンクのためまとめて記述-->
