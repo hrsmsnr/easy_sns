@@ -2,7 +2,7 @@
 <h1>投稿一覧</h1>
 <!-- タブとコンテンツの基本構造 -->
 <div class="tabs">
-  <ul class="nav nav-tabs text-center">
+  <ul class="nav nav-tabs text-center spacing-0">
     <li class="nav-item col">
       <a class="nav-link active" data-toggle="tab" href="#usual" style="background-color:#ffffcc;">日常</a>
     </li>
@@ -17,7 +17,7 @@
     </li>
   </ul>
 
-  <div class="tab-content">
+  <div class="tab-content spacing-0">
     <div id="usual" class="tab-pane fade show active py-3" style="background-color:#ffffcc;">
       <%= render "public/posts/list", posts: @usual_posts %>
     </div>
