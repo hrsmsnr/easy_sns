@@ -3,6 +3,3 @@ eclipseを使ったrails開発環境を構築
 
 2024/07/29
 就活のため更新無し
-
-2024/08/04
-Sourcetree test commit
